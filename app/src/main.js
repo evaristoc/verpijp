@@ -7,17 +7,23 @@ import VueRouter from 'vue-router';
 import {routes} from './routes'
 
 Vue.use(VueRouter);
+const router = new VueRouter({routes});
 
-//components*****************
+
+//global components*****************
+import ecHome from './components/ecHome';
 import ecMapComponent from './components/ecMapComponent';
 import ecMainSidebar from './components/ecMainSidebar';
 import ecPhotoGallery from './components/ecPhotoGallery';
 import ecNavMainSidebar from './components/ecNavMainSidebar';
+import ecGeneralAbout from './components/ecGeneralAbout';
 
+Vue.component('ecHome', ecHome);
 Vue.component('ecMapComponent', ecMapComponent);
 Vue.component('ecMainSidebar', ecMainSidebar);
 Vue.component('ecPhotoGallery', ecPhotoGallery);
 Vue.component('ecNavMainSidebar', ecNavMainSidebar);
+Vue.component('ecGeneralAbout', ecGeneralAbout);
 
 //https://www.webdesignerdepot.com/2013/03/how-to-use-the-fullscreen-api/
 //https://parrot-tutorial.com/jsref/elem_requestfullscreen.html
@@ -43,6 +49,7 @@ window.EventBus = new Vue({
 });
 
 //E: Environment variables in Vue-cli 2 and 3
+//-- https://cli.vuejs.org/guide/mode-and-env.html
 //-- https://stackoverflow.com/questions/10972176/find-the-version-of-an-installed-npm-package
 //-- https://stackoverflow.com/questions/50715302/how-to-use-dotenv-with-vue-js
 export const loadedGoogleMapsAPI = new Promise((resolve, reject) => {
@@ -57,7 +64,7 @@ export const loadedGoogleMapsAPI = new Promise((resolve, reject) => {
 
 
 new Vue({
-    routes,
+    router, //OJO: https://stackoverflow.com/questions/44618761/vue-router-error-typeerror-cannot-read-property-matched-of-undefined
     el: '#app',
     render: h => h(App)
 });

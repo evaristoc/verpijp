@@ -11,7 +11,13 @@
             
             <!-- COMPONENT header-brand START -->
             <div>
-              <h3 class="header-brand">VerPijp <span style="font-size: medium">&rarr;</span> <a href="javascript:void(0)" @click="aboutFunc()" style="display:inline-block;"><strong>{{inmenu}}</strong></a></h3>
+              <h3 class="header-brand">VerPijp</h3>
+                <ul class="nav nav-pills">
+                  <li role="presentation"><a href="#">Gallery</a></li>
+                  <li role="presentation"><a href="#" @click="aboutFunc()">About</a></li>
+                  <!--<router-link to="/main/gallery" tag="li" active-class="active">Gallery</router-link>
+                  <router-link to="/main/about" tag="li" active-class="active">About</router-link>-->
+                </ul>
             </div> <!-- COMPONENT header-brand END -->
             
             <!-- COMPONENT nav-ctrls START -->
@@ -35,16 +41,54 @@
 <script>
     import Vue from 'vue'
     
+   
     export default {
-        props:['filteredLocations', 'locations'],
 
         data(){
           return {
                     search: '',
+                    tracking: false,
+                    showAboutSect:false,
                 };
         },
         
+        props:['locations'],
+        
+        computed:{
+            filteredLocations(){ //filtered items/markers
+                let l;
+                if (!this.locations.length) {
+                    return [];
+                }
+                l = this.locations.filter(loc => {
+                        //console.log(loc)
+                        let nosearch = this.search ==='' || this.search ===' '
+                        if (nosearch) {
+                            return true
+                        }
+                        return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+                    })
+        
+                this.$emit('efilteredLocations', l);
+                
+                return l;
+        
+                //this.$emit('_filteredLocations',  this.locations.filter(loc => {
+                //        let nosearch = this.search ==='' || this.search ===' '
+                //        if (nosearch) {
+                //            return true
+                //        }
+                //        return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+                //    }))
+                
+            },
+            
+
+            
+        },
+        
         mounted(){
+            this.filteredLocations;
             Vue.nextTick().then(()=>{
             this.closeNav();
           });
@@ -52,24 +96,28 @@
         
         methods:{
                 closeNav() {
-                   document.getElementById("mySidenav").style.width = "0px"
-                   document.getElementById("menu-open-test").style.marginLeft = "0px"
-                   document.getElementById("menu-open-test").style.visibility = "visible"
+                   document.getElementById("mySidenav").style.width = "0px";
+                   document.getElementById("menu-open-test").style.marginLeft = "0px";
+                   document.getElementById("menu-open-test").style.visibility = "visible";
+                   this.$router.push({name:'home'});
                   },
                 aboutFunc(){
                     this.showAboutSect = !this.showAboutSect;
                     if (this.showAboutSect) {
-                        this.inmenu = 'Images';
+                        //this.inmenu = 'Images';
                         document.getElementById("mySidenav").style.overflow = "scroll";
                         document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
+                        this.$router.push({path:'/main/gallery'});
                     }else{
-                        this.inmenu = 'About';
+                        //this.inmenu = 'About';
                         document.getElementById("mySidenav").style.overflow = "hidden";
                         document.getElementById("wrap-data-area").style.height = "100%";
+                        this.$router.push({path:'about'});
                     }
                 },
                 selAllMarkers(){ //based on filtered data!!!
                   //console.log(111, this.filteredLocations.length);
+                  //console.log(222, this.locations.length);
                   
                   for(let idx = 0; idx < this.filteredLocations.length; idx++){
                       let jdx = this.filteredLocations[idx].itemid;

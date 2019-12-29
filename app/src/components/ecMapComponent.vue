@@ -41,7 +41,7 @@
                     .then(()=>{
                         this.initMap();
                         this.$mymarker = this.makeMarker(mymarker, true);
-                        console.log('mm', this.$mymarker);
+                        //console.log('mm', this.$mymarker);
                     })
                     .catch((err)=>{console.log("RESULT loading GM API", err)});
       Vue.nextTick()

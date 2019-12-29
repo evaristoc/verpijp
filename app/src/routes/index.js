@@ -1,18 +1,31 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-//import Home from '../views/Home.vue'
-import Home from '../components/ecMapComponent.vue' //map is my MAIN
+//import Home from '../App.vue' //map is my MAIN
+import Home from '../components/ecHome.vue'
+import MainSidebar from '../components/ecMainSidebar.vue'
+import Gallery from '../components/ecPhotoGallery.vue'
+import GenAbout from '../components/ecGeneralAbout.vue'
 
-Vue.use(VueRouter)
-
-const routes = [
+export const routes = [
   {
-    path: '/',
+    path: '',
     name: 'home',
     component: Home
   },
   {
-    path: ''
+    path: '/main',
+    name: 'mainsidebar',
+    component: MainSidebar,
+    children: [
+      {
+        path: 'gallery', //CHECKOUT the slash! without it, it will be appended to parent directly, otherwise it would be to root
+        name: 'gallery',
+        component: Gallery
+      },
+      {
+        path: 'about',
+        name: 'about',
+        component: GenAbout
+      },      
+    ]
   }
   //{
   //  path: '/about',
@@ -24,8 +37,3 @@ const routes = [
   //}
 ]
 
-const router = new VueRouter({
-  routes
-})
-
-export default router
