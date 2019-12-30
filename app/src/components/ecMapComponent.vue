@@ -32,24 +32,7 @@
       },
       'mapstyle': null
     },
-    mounted() {
-      this.$markers = {};
-      this.$mymarker = {};
-      let mymarker = {lat:0,lng:0,street:''};
-      //this.initMap();
-      loadedGoogleMapsAPI
-                    .then(()=>{
-                        this.initMap();
-                        this.$mymarker = this.makeMarker(mymarker, true);
-                        //console.log('mm', this.$mymarker);
-                    })
-                    .catch((err)=>{console.log("RESULT loading GM API", err)});
-      Vue.nextTick()
-                    .then(()=>{
-                        this.clearMarker();
-                        //console.error('HERE SHOULD BE clearMarkers')
-                    });
-    },
+
     created(){
       window.EventBus.$on('clear-all-markers', ()=>{
         this.clearAllMarkers();
@@ -70,6 +53,25 @@
             this.stopTrackPosition()
         }
       })
+    },
+
+    mounted() {
+      this.$markers = {};
+      this.$mymarker = {};
+      let mymarker = {lat:0,lng:0,street:''};
+      //this.initMap();
+      loadedGoogleMapsAPI
+                    .then(()=>{
+                        this.initMap();
+                        this.$mymarker = this.makeMarker(mymarker, true);
+                        //console.log('mm', this.$mymarker);
+                    })
+                    .catch((err)=>{console.log("RESULT loading GM API", err)});
+      Vue.nextTick()
+                    .then(()=>{
+                        this.clearMarker();
+                        //console.error('HERE SHOULD BE clearMarkers')
+                    });
     },
     data(){
         return {

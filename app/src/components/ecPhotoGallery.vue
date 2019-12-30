@@ -2,7 +2,7 @@
      <!-- COMPONENT wrap-data-area START --> 
      <div id="wrap-data-area"> 
             <!-- COMPONENT gallery START -->
-            <div id="sel-gallery" class="content-fluid" v-if="!showAboutSect">
+            <div id="sel-gallery" class="content-fluid">
                   <div class="grid">
                       <div class="cell" v-for="loc in filteredLocations">
                           <div class="item-title">
@@ -27,7 +27,11 @@
                 };
         },
        
-      
+      mounted(){
+            this.locations;
+            this.filteredLocations;
+      },
+       
        computed:{
        //     filteredLocations: function(){
        //           return filteredLocations

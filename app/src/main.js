@@ -11,14 +11,12 @@ const router = new VueRouter({routes});
 
 
 //global components*****************
-import ecHome from './components/ecHome';
 import ecMapComponent from './components/ecMapComponent';
 import ecMainSidebar from './components/ecMainSidebar';
 import ecPhotoGallery from './components/ecPhotoGallery';
 import ecNavMainSidebar from './components/ecNavMainSidebar';
 import ecGeneralAbout from './components/ecGeneralAbout';
 
-Vue.component('ecHome', ecHome);
 Vue.component('ecMapComponent', ecMapComponent);
 Vue.component('ecMainSidebar', ecMainSidebar);
 Vue.component('ecPhotoGallery', ecPhotoGallery);

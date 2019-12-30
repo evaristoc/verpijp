@@ -13,10 +13,10 @@
             <div>
               <h3 class="header-brand">VerPijp</h3>
                 <ul class="nav nav-pills">
-                  <li role="presentation"><a href="#">Gallery</a></li>
-                  <li role="presentation"><a href="#" @click="aboutFunc()">About</a></li>
-                  <!--<router-link to="/main/gallery" tag="li" active-class="active">Gallery</router-link>
-                  <router-link to="/main/about" tag="li" active-class="active">About</router-link>-->
+                  <!--<li role="presentation"><a @click="galleryFunc()" style="cursor:pointer;">Gallery</a></li>
+                  <li role="presentation"><a @click="aboutFunc()" style="cursor:pointer;">About</a></li>-->
+                  <router-link to="gallery" tag="li" active-class="active"><a>Gallery</a></router-link>
+                  <router-link to="about" tag="li" active-class="active"><a>About</a></router-link>
                 </ul>
             </div> <!-- COMPONENT header-brand END -->
             
@@ -102,18 +102,25 @@
                    this.$router.push({name:'home'});
                   },
                 aboutFunc(){
-                    this.showAboutSect = !this.showAboutSect;
-                    if (this.showAboutSect) {
-                        //this.inmenu = 'Images';
-                        document.getElementById("mySidenav").style.overflow = "scroll";
-                        document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
-                        this.$router.push({path:'/main/gallery'});
-                    }else{
-                        //this.inmenu = 'About';
+                        this.showAboutSect = true;
                         document.getElementById("mySidenav").style.overflow = "hidden";
-                        document.getElementById("wrap-data-area").style.height = "100%";
-                        this.$router.push({path:'about'});
-                    }
+                        this.$router.push({path:'about'}, function(){this.$emit("eshowAboutSect",this.showAboutSect)}.bind(this));                    
+                    
+                    //if (this.showAboutSect) {
+                    //    //this.inmenu = 'Images';
+                    //    document.getElementById("mySidenav").style.overflow = "scroll";
+                    //    document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
+                    //    this.$router.push({path:'/main/gallery'});
+                    //}else{
+                    //    //this.inmenu = 'About';
+                    //
+                    //}
+                },
+                galleryFunc(){
+                        this.showAboutSect = false;
+                        document.getElementById("mySidenav").style.overflow = "scroll";
+                        //document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
+                        this.$router.push({path:'gallery'}, function(){this.$emit("eshowAboutSect",this.showAboutSect)}.bind(this));
                 },
                 selAllMarkers(){ //based on filtered data!!!
                   //console.log(111, this.filteredLocations.length);

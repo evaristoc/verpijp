@@ -1,6 +1,6 @@
 <template>
         <!-- COMPONENT about START -->
-    <div id="about" style="margin:10px 20px;" v-if="showAboutSect">
+    <div id="about" style="margin:10px 20px;">
         <div>
           <h4 style="margin: 30px 20px;"><u>About VerPijp</u></h4>
           

@@ -30,11 +30,9 @@
       <!-- COMPONENT mySidebar START -->
       <div class="childsidenav" id="mySidenav">
         
-        <ec-nav-main-sidebar :locations="locations" @efilteredLocations="transLocation = $event"></ec-nav-main-sidebar> <!-- this component manages all the required data -->
-        <ec-photo-gallery :locations="locations" :filteredLocations="transLocation"></ec-photo-gallery> <!-- this component listen to changes in the data -->
-        <!-- COMPONENT about START -->
-        <ec-general-about></ec-general-about>
-        <!-- COMPONENT about END -->
+        <ec-nav-main-sidebar :locations="locations" @efilteredLocations="transLocation = $event" @eshowAboutSect="showAboutSect = $event"></ec-nav-main-sidebar> <!-- this component manages all the required data -->
+        
+        <router-view :locations="locations" :filteredLocations="transLocation"></router-view>
 
     </div> <!-- COMPONENT mySidebar END -->
     
@@ -59,7 +57,6 @@
 
         showAboutSect: false,
         cl1: "'btn btn-outline-info btn-street'",
-        inmenu: 'About',
         center: window.EventBus.depijpcenter,
         locations: verdata.output,
         transLocation:[],
@@ -98,33 +95,19 @@
   
     },
     mounted(){
-        
-        
-        
+
         Vue.nextTick().then(()=>{
         this.closeNav();
       });
     },
     methods: {
-        aboutFunc(){
-            this.showAboutSect = !this.showAboutSect;
-            if (this.showAboutSect) {
-                this.inmenu = 'Images';
-                document.getElementById("mySidenav").style.overflow = "scroll";
-                document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
-            }else{
-                this.inmenu = 'About';
-                document.getElementById("mySidenav").style.overflow = "hidden";
-                document.getElementById("wrap-data-area").style.height = "100%";
-            }
-        },
 
       openNav(){
             document.getElementById("mySidenav").style.width = "100%";
             //document.getElementById("mySidenav").style.display = "block";
             document.getElementById("menu-open-test").style.marginLeft = "100%";
             document.getElementById("menu-open-test").style.visibility = "hidden";
-            this.$router.push({path:'/main/gallery'});
+            this.$router.push({path:'/gallery'});
       },
 
       closeModal(){
