@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 
+//plugins*******************
 //routers*******************
 import VueRouter from 'vue-router';
 import {routes} from './routes'
@@ -16,12 +17,18 @@ import ecMainSidebar from './components/ecMainSidebar';
 import ecPhotoGallery from './components/ecPhotoGallery';
 import ecNavMainSidebar from './components/ecNavMainSidebar';
 import ecGeneralAbout from './components/ecGeneralAbout';
+import ecCamInterf from './components/ecCameraInterface.vue'
 
 Vue.component('ecMapComponent', ecMapComponent);
 Vue.component('ecMainSidebar', ecMainSidebar);
 Vue.component('ecPhotoGallery', ecPhotoGallery);
 Vue.component('ecNavMainSidebar', ecNavMainSidebar);
 Vue.component('ecGeneralAbout', ecGeneralAbout);
+Vue.component('ecCamInterf', ecCamInterf);
+
+//third-party components*****************
+import VueDraggableResizable from 'vue-draggable-resizable';
+Vue.component('VueDraggableResizable', VueDraggableResizable);
 
 //https://www.webdesignerdepot.com/2013/03/how-to-use-the-fullscreen-api/
 //https://parrot-tutorial.com/jsref/elem_requestfullscreen.html

@@ -18,6 +18,8 @@ the sidebar to see it
 IMPORTANT: If one of the components INSIDE the router-view logic requires data from its CURRENT PARENT,
 data MUST be passed (chained) to the router-view for the the components to access it (or use Vuex)
 
+IMPORTANT: home renders because it points to 2 global components that are already registered; otherwise, nothing
+
 References to keep around...
 --- https://medium.com/@saidhayani/understand-routing-in-vue-js-with-examples-6da96979c8e3
 --- https://regenrek.com/posts/how-to-create-an-animated-vue-sidebar-menu-with-vue-observable/ (check also codepens)
@@ -33,6 +35,8 @@ import MainSidebar from '../components/ecMainSidebar.vue'
 import Gallery from '../components/ecPhotoGallery.vue'
 
 import GenAbout from '../components/ecGeneralAbout.vue'
+
+import CamInterf from '../components/ecCameraInterface.vue'
 
 export const routes = [
   {
@@ -52,6 +56,12 @@ export const routes = [
         component: GenAbout
       },
     ]
+  },
+  
+  {
+    path:'/testcamera',
+    name: 'camera',
+    component: CamInterf,
   },
 
   {
