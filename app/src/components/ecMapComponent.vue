@@ -1,5 +1,25 @@
 <template>
     <div>
+        <div class="modal fade" id="myModal_map" style="background-color: rgba(0, 0, 0, 0.6);">
+              <!-- REFERENCES -->
+              <!--https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_modal&stacked=h-->
+              <!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img-->
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+              <div class="modal-content mb-0 p-0" style="background-color: rgba(255, 255, 255, 0.6);">
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <button type="button" class="btn btn-warning close-modal" @click="closeModal()">&times;</button>
+                    <img class="img-fluid" id="img01_map" style="height:100%; width:100%;">
+                  </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                  <h5 id="modal-title_map" style="color:blue"></h5>
+                </div>
+              </div>
+            </div>
+        </div>
         <!--<h1>VerPijp Project</h1>-->
         <div id="map" class="h-250"></div>
     </div>
@@ -110,15 +130,28 @@
         //    '</div>'+
         //    '</div>';
         //console.log(d);
-        var contentString = `<div id="content">
-            <div id="siteNotice"></div>
-            <table>
-            <tr><td><a href=${d.picture}><strong>foto</strong></a></td></tr>
-            <tr><td><a href="https://evaristoc.github.io/ar_experiments/konvaJS/test9.html?q=${d.picture}"><strong>foto overlap (experimental)</strong></a></td></tr>
-            <tr><td><strong>year</strong></td><td>${d.year}</td></tr>
-            <tr><td><strong>est.address</strong></td><td>${d.street}</td></tr>
-            <tr><td><strong>bron</strong></td><td><a href="https://www.facebook.com/PrentenVanWeleerAmsterdamDePijp/">Postcards from de Pijp</a></td></tr>
-            </table>
+        window.openModal_map = function(picture){
+              let modal = document.getElementById('myModal_map');
+              //let img = document.getElementById(this.idConcat(loc.itemid+'_img'));
+              //let captionText = document.getElementById("modal-title_map");
+              //console.log(img.src);
+              let modalImg = document.getElementById("img01_map");
+              modal.style.display = "block";
+              modalImg.src = picture;
+              //captionText.innerHTML = loc.street+", "+loc.year;
+              modal.classList.add('show');
+        };
+        
+        var contentString = `
+            <div id="content">
+                <div id="siteNotice"></div>
+                <table>
+                    <tr><td><button onclick="openModal_map('${d.picture}')"><strong>foto</strong></button></td></tr>
+                    <tr><td><a href="/#/testcamera?q=${d.picture}"><strong>foto overlap (experimental)</strong></a></td></tr>
+                    <tr><td><strong>year</strong></td><td>${d.year}</td></tr>
+                    <tr><td><strong>est.address</strong></td><td>${d.street}</td></tr>
+                    <tr><td><strong>bron</strong></td><td><a href="https://www.facebook.com/PrentenVanWeleerAmsterdamDePijp/">Postcards from de Pijp</a></td></tr>
+                </table>
             <\div>
             `
         
@@ -127,6 +160,23 @@
           content: contentString
         });
       
+      },
+        openModal(picture){
+              let modal = document.getElementById('myModal_map');
+              //let img = document.getElementById(this.idConcat(loc.itemid+'_img'));
+              //let captionText = document.getElementById("modal-title_map");
+              //console.log(img.src);
+              let modalImg = document.getElementById("img01_map");
+              modal.style.display = "block";
+              modalImg.src = picture;
+              //captionText.innerHTML = loc.street+", "+loc.year;
+              modal.classList.add('show');
+        },
+      closeModal(){
+        //let span = document.getElementsByClassName("close-modal")[0];
+        let modal = document.getElementById('myModal_map');
+        modal.classList.remove('show');
+        modal.style.display = "none";
       },
       makeMarker(d, mymark=false) {
         let zelf = this;

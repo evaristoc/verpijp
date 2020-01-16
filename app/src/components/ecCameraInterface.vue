@@ -2,13 +2,33 @@
    <div id="vid-outerContainer">
        <video id="videostream" class="vid-containers" type="video/webm"></video>
        <div id="video-overlay" class="vid-containers">
+           
+           <!-- SIDEBAR MENU -->
            <div id="vid-mySidenav" class="vid-sidenav">
              <a href="javascript:void(0)" class="vid-closemenu" @click="closeNav()">&times;</a>
              <a href="#">Photo Story</a>
              <a href="#">Tutorial</a>
              <a href="#">Back to Main</a>
            </div>
+           
+           <!-- BURGER -->
            <span id="vid-openmenu" style="font-size:30px;cursor:pointer" @click="openNav()">&#9776;</span>
+
+            <!-- IMAGE HANDLER -->          
+           <div v-bind:style="{ transform: 'scale(' + scale + ')' }">
+              <vue-draggable-resizable :h="height_comp" :scale="scale">
+               <img src="../assets/46462438_1572546156223211_4054682576076406784_o.jpg" class="w3-round" alt="OldSarphati">
+              </vue-draggable-resizable>
+           </div>
+
+           <!-- SLIDER -->
+           <div id="toolbar">
+             <input type="range" min="0.5" max="3" step="0.1" v-model.number="scale">
+             <label>Scale</label>
+          </div>
+
+           
+           <!-- CAMERA BUTTON -->
            <button id="vid-capture-button">
              <i id="yes-camera" class="fas fa-camera-retro fa-3x"></i>
              <span id="no-camera" class="fa-stack fa-lg">
@@ -16,15 +36,13 @@
                <i class="fa fa-ban fa-stack-2x" style="color: #d9534f;"></i>
              </span>
            </button>
-      <div v-bind:style="{ transform: 'scale(' + scale + ')' }">
-        <vue-draggable-resizable :h="height_comp" :scale="scale">
-         <img src="../assets/46462438_1572546156223211_4054682576076406784_o.jpg" class="w3-round" alt="OldSarphati">
-        </vue-draggable-resizable>
-      </div>
-      <div id="toolbar">
-          <input type="range" min="0.5" max="3" step="0.1" v-model.number="scale">
-          <label>Scale</label>
-        </div>
+           
+
+      
+          <!-- COMPASS -->
+           <button id="compass">
+             <i class="fas fa-compass fa-3x"></i>
+           </button>
     </div>
    </div>
 </template>
@@ -205,8 +223,11 @@ export default {
     }
     
    /**
-    *CAMERA BUTTON
+    *CAMERA and COMPASS BUTTONS
     */
+
+  i { vertical-align: middle; }
+  
    #vid-capture-button{
         position: absolute;
         bottom:15px;
@@ -214,11 +235,16 @@ export default {
         z-index: 1;
     }
     
-  i { vertical-align: middle; }
-  
- 
+
    #no-camera{
     display:none;
+  }
+  
+  #compass{
+        position: absolute;
+        bottom:15px;
+        right:15px;
+        z-index: 1;
   }
    
    #toolbar {
