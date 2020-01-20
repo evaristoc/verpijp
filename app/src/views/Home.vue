@@ -3,10 +3,12 @@
       <div id="appcontent">    
             <!--<router-view name='sidebar'></router-view>
             <router-view name='map'></router-view>-->
-            <ec-main-sidebar></ec-main-sidebar>
-            <div>
-              <ec-map-component></ec-map-component>
-            </div>
+            
+                  <ec-main-sidebar></ec-main-sidebar>
+                  <div>
+                       <ec-map-component></ec-map-component>
+                  </div>                  
+            
             
     </div>
     

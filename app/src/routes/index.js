@@ -30,7 +30,6 @@ References to keep around...
 */
 
 import home from '../views/Home.vue';
-import MainSidebar from '../components/ecMainSidebar.vue'
 
 import Gallery from '../components/ecPhotoGallery.vue'
 

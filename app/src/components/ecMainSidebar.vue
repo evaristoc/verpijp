@@ -4,35 +4,13 @@
     <!-- COMPONENT sidebar START -->
     <div class="sidenav">
 
-        <!-- COMPONENT Modal START-->
-        <div class="modal fade" id="myModal" style="background-color: rgba(0, 0, 0, 0.6);">
-              <!-- REFERENCES -->
-              <!--https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_modal&stacked=h-->
-              <!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img-->
-            <div class="modal-dialog modal-dialog-centered modal-sm">
-              <div class="modal-content mb-0 p-0" style="background-color: rgba(255, 255, 255, 0.6);">
-                <!-- Modal body -->
-                <div class="modal-body">
-                  <div class="container-fluid">
-                    <button type="button" class="btn btn-warning close-modal" @click="closeModal()">&times;</button>
-                    <img class="img-fluid" id="img01" style="height:100%; width:100%;">
-                  </div>
-                </div>
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                  <h5 id="modal-title" style="color:blue"></h5>
-                </div>
-              </div>
-            </div>
-        </div><!-- COMPONENT Modal END-->
-
     
       <!-- COMPONENT mySidebar START -->
       <div class="childsidenav" id="mySidenav">
         
-        <ec-nav-main-sidebar :locations="locations" @efilteredLocations="transLocation = $event" @eshowAboutSect="showAboutSect = $event"></ec-nav-main-sidebar> <!-- this component manages all the required data -->
+        <ec-nav-main-sidebar></ec-nav-main-sidebar> <!-- this component managed data; now centralized in corresponding component -->
         
-        <router-view :locations="locations" :filteredLocations="transLocation"></router-view>
+        <router-view></router-view><!-- to GALLERY, ABOUT -->
 
     </div> <!-- COMPONENT mySidebar END -->
     
@@ -44,62 +22,12 @@
 <script>
   import Vue from 'vue';
   
-  import {verdata} from '../assets/verpijptest.js'
-    for(let i=0; i < verdata.output.length; i++){
-        verdata.output[i].currentclass = "'btn btn-outline-info btn-street'";
-        verdata.output[i].sel = false;
-    }
+
   
    
   export default {
-    data(){
-      return {
-
-        showAboutSect: false,
-        cl1: "'btn btn-outline-info btn-street'",
-        center: window.EventBus.depijpcenter,
-        locations: verdata.output,
-        transLocation:[],
-
-        /*locations: [
-                  {
-                  "itemid":0,
-                  "lng":4.889855,
-                  "lat": 52.3549173,
-                  "street":"Albert Cuypstraat 75",
-                  "picture":"https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/50796950_1631349163676243_1282903763492798464_n.jpg?_nc_cat=109&_nc_ht=scontent-amt2-1.xx&oh=d4f9f18af5108ea5b65d4a1f886887c3&oe=5D2626A3",
-                  "year":1969
-                  },
-                  {
-                  "itemid":1,
-                  "lng":4.8901227,
-                  "lat": 52.3547195,
-                  "street":"Ferdinand Bolstraat 84-86",
-                  "picture":"https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/40641496_1507485882729239_7087404085233582080_n.jpg?_nc_cat=110&_nc_ht=scontent-amt2-1.xx&oh=edb205cf8e8b6e2bebac912ab350ed35&oe=5CEFED17",
-                  "year":1930
-                  },
-                  {
-                  "itemid":2,
-                  "lng":4.8910285,
-                  "lat": 52.3551092,
-                  "street":"Albert Cuypstraat 80",
-                  "picture":"https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/47190351_1585615151582978_5862906576976740352_n.jpg?_nc_cat=108&_nc_ht=scontent-amt2-1.xx&oh=bbb979b20ee2d7b95ae589ed6dca68de&oe=5CF11BF3",
-                  "year":1905
-                  }
-                  ],
-       */
-
-      };
-    },
-    created(){
+   
   
-    },
-    mounted(){
-
-        Vue.nextTick().then(()=>{
-        this.closeNav();
-      });
-    },
     methods: {
 
       openNav(){
@@ -109,13 +37,6 @@
             document.getElementById("menu-open-test").style.visibility = "hidden";
             this.$router.push({path:'/gallery'});
       },
-
-      closeModal(){
-        //let span = document.getElementsByClassName("close-modal")[0];
-        let modal = document.getElementById('myModal');
-        modal.classList.remove('show');
-        modal.style.display = "none";
-      }
     }
   }
 
@@ -133,30 +54,6 @@
     .item-title{
         text-transform:capitalize;
     }
-  /*colors (0to255 -> adobe):
-   * background: #BFACAC
-   * base: #727272
-   * closeto: #7F7F73
-   * darker effects: #393D3F
-   * mild effects: #ACB8BF
-   *
-   */
-  
-    /*
-    #sidebar-data {
-    min-width: 250px;
-    max-width: 250px;
-    top: 0;
-    left: 0;
-    z-index: 1;
-   }
-   
-
-   
-#menu-open-test{
-    transition: 0.5s;
-}
-   */
     
 /*==========================
  *
@@ -319,6 +216,11 @@
  *
  *==========================*/
 
+  #about{
+   overflow-y:scroll;
+      height:80vh;
+  }
+ 
   #myphoto{
     width:150px;
     height:200px;
@@ -381,74 +283,3 @@
 }
 
 </style>
-        <!--<div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-        
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
-        
-                </div>
-            </nav>
-&times;
-&#9776
-style="position:absolute;float:left;"
-  h3 {
-    font-size: 35px;
-    text-align:justify !important;
-  }
-  
-  #mySidenav {
-    /*padding-top: 15px;*/
-    font-size: 20px;
-  }
-  .btn {
-    font-size:30px;
-  }
-  /*#mySidenav a {font-size: 18px;}*/
-  
-  #nav-ctrls {
-    margin-left: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    /*justify-content: space-around;
-    background-color: DodgerBlue;*/
-}
-
-#nav-ctrls .btn {
-    /*border: none;*/ 
-}
-
-#upperctr{
-    float:right;
-    position:relative;
-}
-
-#sidebar-header {
-    /*text-align: center;
-    float: left;*/
-    display: inline-block;
-    margin: 6px 8px 8px 0px;
-    
-  }
-
-#upperctr input, button{
-    /*margin-left: 10px;*/
-    display: inline-block;
-} 
-
-#searchfilter{
-    margin: 8px 0px 8px 10px;
-}
-
-.sidebar-upperctr-elem {
-
-}
-
-#clearingbtn {
- /*text-align: center;*/
-}
-style="margin-top:30px;display:flex;flex-direction:row;justify-content:flex-start;"
-style="display:flex;flex-direction:row;"

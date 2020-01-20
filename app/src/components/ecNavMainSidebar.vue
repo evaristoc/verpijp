@@ -1,11 +1,7 @@
 <template>
         <!-- COMPONENT navbar-area START -->
     <div id="navbar-area">
-        <!-- COMPONENT toggler-nav START -->
-        <div id="toggler-nav">
-            <a href="javascript:void(0)" id="closebtn" @click="closeNav()" v-if="!showAboutSect">Go to Map</a>
-        </div> <!-- COMPONENT toggler-nav END -->
-              
+             
         <!-- COMPONENT sidebar-data START -->
         <div id="sidebar-data">
             
@@ -13,163 +9,11 @@
             <div>
               <h3 class="header-brand">VerPijp</h3>
                 <ul class="nav nav-pills">
-                  <!--<li role="presentation"><a @click="galleryFunc()" style="cursor:pointer;">Gallery</a></li>
-                  <li role="presentation"><a @click="aboutFunc()" style="cursor:pointer;">About</a></li>-->
                   <router-link to="gallery" tag="li" active-class="active"><a>Gallery</a></router-link>
                   <router-link to="about" tag="li" active-class="active"><a>About</a></router-link>
                 </ul>
             </div> <!-- COMPONENT header-brand END -->
             
-            <!-- COMPONENT nav-ctrls START -->
-            <div v-if="!showAboutSect">
-                <div id="nav-ctrls" class="container">
-                    <div class="row">
-                        <div id="upperctr">
-                            <input id="searchfilter" class="sidebar-upperctr-elem" type="text" v-model="search" placeholder="Search street and/or year">
-                        </div>
-                        <div>
-                            <button @click="selAllMarkers" class="btn btn-outline-warning sidebar-upperctr-elem" id="clearingbtn">Select all</button>
-                            <button @click="clearAllMarkers" class="btn btn-outline-warning sidebar-upperctr-elem" id="clearingbtn">Clear all</button>
-                        </div>
-                        <button id="trackingbtn" class="btn btn-outline-warning" @click=trackingAllowed() style="margin-left:5px;">Tracking?</button>
-                    </div>
-                </div><!-- COMPONENT nav-ctrls END -->
-            </div><!-- !showAboutSect section -->
         </div><!-- COMPONENT sidebar-data END -->
     </div><!-- COMPONENT navbar-area END -->
 </template>
-<script>
-    import Vue from 'vue'
-    
-   
-    export default {
-
-        data(){
-          return {
-                    search: '',
-                    tracking: false,
-                    showAboutSect:false,
-                };
-        },
-        
-        props:['locations'],
-        
-        computed:{
-            filteredLocations(){ //filtered items/markers
-                let l;
-                if (!this.locations.length) {
-                    return [];
-                }
-                l = this.locations.filter(loc => {
-                        //console.log(loc)
-                        let nosearch = this.search ==='' || this.search ===' '
-                        if (nosearch) {
-                            return true
-                        }
-                        return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
-                    })
-        
-                this.$emit('efilteredLocations', l);
-                
-                return l;
-        
-                //this.$emit('_filteredLocations',  this.locations.filter(loc => {
-                //        let nosearch = this.search ==='' || this.search ===' '
-                //        if (nosearch) {
-                //            return true
-                //        }
-                //        return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
-                //    }))
-                
-            },
-            
-
-            
-        },
-        
-        mounted(){
-            this.filteredLocations;
-            Vue.nextTick().then(()=>{
-            this.closeNav();
-          });
-        },
-        
-        methods:{
-                closeNav() {
-                   document.getElementById("mySidenav").style.width = "0px";
-                   document.getElementById("menu-open-test").style.marginLeft = "0px";
-                   document.getElementById("menu-open-test").style.visibility = "visible";
-                   this.$router.push({name:'home'});
-                  },
-                aboutFunc(){
-                        this.showAboutSect = true;
-                        document.getElementById("mySidenav").style.overflow = "hidden";
-                        this.$router.push({path:'about'}, function(){this.$emit("eshowAboutSect",this.showAboutSect)}.bind(this));                    
-                    
-                    //if (this.showAboutSect) {
-                    //    //this.inmenu = 'Images';
-                    //    document.getElementById("mySidenav").style.overflow = "scroll";
-                    //    document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
-                    //    this.$router.push({path:'/main/gallery'});
-                    //}else{
-                    //    //this.inmenu = 'About';
-                    //
-                    //}
-                },
-                galleryFunc(){
-                        this.showAboutSect = false;
-                        document.getElementById("mySidenav").style.overflow = "scroll";
-                        //document.getElementById("wrap-data-area").style.height = "50px"; //A hack!!!: a large empty area shows if height not controlled
-                        this.$router.push({path:'gallery'}, function(){this.$emit("eshowAboutSect",this.showAboutSect)}.bind(this));
-                },
-                selAllMarkers(){ //based on filtered data!!!
-                  //console.log(111, this.filteredLocations.length);
-                  //console.log(222, this.locations.length);
-                  
-                  for(let idx = 0; idx < this.filteredLocations.length; idx++){
-                      let jdx = this.filteredLocations[idx].itemid;
-                      if ((this.locations[jdx].hasOwnProperty("sel") && this.locations[jdx].sel === false) || !this.locations[jdx].hasOwnProperty("sel")) {
-                          let e = {target:{value:jdx}};
-                          this.cltMarker(e);
-                           
-                      }
-                      //EventBus.$emit('clear-all-markers');   
-                  }
-                }, 
-                clearAllMarkers(){ //based on filtered data!!!
-                  for(let idx = 0; idx < this.filteredLocations.length; idx++){
-                      let l = this.locations.filter((v)=>{return v.itemid === this.filteredLocations[idx].itemid})[0]
-                      if (l.hasOwnProperty("sel") && l.sel === true) {
-                          let e = {target:{value:l.itemid}};
-                          this.cltMarker(e)
-                      }
-                  }
-                },
-                cltMarker(e){ //an emiter only; currently duplicated between NavMain.. and PhotoGal.. to facilitate redoing
-                  let idx = e.target.value;
-                  if (document.getElementById("btnaddmark_"+idx)) {
-                      if (document.getElementById("btnaddmark_"+idx).classList.contains("btn-outline-info")) {
-                          this.locations[idx].sel = true;
-                         
-                      }else if(document.getElementById("btnaddmark_"+idx).classList.contains("btn-outline-secondary")) {
-                          this.locations[idx].sel = false;
-                          
-                      }
-          
-                      window.EventBus.$emit('clt-marker', this.locations[idx]);
-            
-                  }
-          
-          
-                },
-                trackingAllowed(){
-                  if (this.tracking==false) {
-                      this.tracking = true
-                  }else{
-                      this.tracking = false
-                  }
-                  window.EventBus.$emit('tracking',{tr:this.tracking})
-                },
-        }
-    }
-</script>

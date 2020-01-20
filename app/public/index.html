@@ -11,6 +11,11 @@
     <link rel="stylesheet " href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css " integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm " crossorigin="anonymous ">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.1.0/chroma.min.js"></script>
+    <script>
+         //making it public so it is accessible to modules
+         //declaring it before running build.js
+         var cscale = chroma.scale(['#000','#fafa6e']).mode('lch').colors(10);
+    </script>
     <title>VerPijp</title>
 </head>
 
@@ -26,98 +31,5 @@
     window.addEventListener('load', (event) => {
       console.log('page is fully loaded');
     });
-                    
-    var video = document.getElementById('videostream');
-    video.src = 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4';
-    var captureVideoButton = document.querySelector('#vid-capture-button');
-    var videoplay = false;
-    
-    captureVideoButton.onclick = function() {
-        if (videoplay === false) {
-          //code
-          video.play();
-          //document.getElementById('capture-button').remove();
-          document.getElementById('yes-camera').style.display = 'none';
-          document.getElementById('no-camera').style.display = 'inline-block';
-          videoplay = true;
-        }else{
-          video.pause();
-          document.getElementById('no-camera').style.display = 'none';
-          document.getElementById('yes-camera').style.display = 'inline-block';
-          videoplay = false;
-        }
-    
-    };
-    
-    var devorienteventName = '';    
-    var compass = document.querySelector('#compass');
-    var cscale = chroma.scale(['#000','#fafa6e']).mode('lch').colors(10);
-    var compassactive = false;
-    
-      function deviceOrientation() {
-        //code
-        if ('ondeviceorientationabsolute' in window) {
-            devorienteventName = 'deviceorientationabsolute';
-            //alert(devorienteventName);
-        }else if ('ondeviceorientation' in window) {
-            devorienteventName = 'deviceorientation';
-            //alert(devorienteventName);
-        } else {
-            devorienteventName = '';
-            console.error('Compass not supported');
-            //alert('Compass not supported');
-        };
-
-        if ('onorientation' in window || 'orientation' in window) {
-        }
-        
-      }
-      
-    
-      
-     function handler_absolute(event){
-          //console.log(222);
-          
-          var alpha = event.alpha; //z
-          var beta = event.beta; //x
-          var gamma = event.gamma; //y
-          var absolute = event.absolute? event.absolute:"undefined?";
-          
-          var rad = Math.PI/180;
-
-          if (!alpha||!beta||!gamma) {
-            //code
-            alpha = beta = gamma = 0;
-          }
-          
-          body.style.borderColor = cscale[Math.trunc(Math.cos(Math.abs(alpha)*Math.PI/180)*10) > 9? 9:Math.round(Math.cos(Math.abs(alpha)*Math.PI/180)*10)];
-       
-      }
-      
-      var body = document.querySelector('#vid-outerContainer');
-      $(document).ready(function(){
-        //console.log(111);
-        compass.onclick = function(){
-            if (!compassactive) {
-                //code
-                body.style.borderStyle = 'solid';
-                body.style.borderWidth = '15px';
-                deviceOrientation();
-                window.addEventListener(devorienteventName, handler_absolute, true);
-                compass.style.color = 'red'
-            }else{
-                body.style.borderStyle = 'none';
-                body.style.borderWidth = '0px';
-                deviceOrientation();
-                window.removeEventListener(devorienteventName, handler_absolute);
-                compass.style.color = 'black'
-            };
-            
-            compassactive = !compassactive;
-            
-        }
-      });
-    
-    
 </script>
 </html>

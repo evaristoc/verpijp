@@ -25,3 +25,5 @@
         </div>
     </div><!-- COMPONENT about END -->
 </template>
+<style>
+</style>

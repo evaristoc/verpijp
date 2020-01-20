@@ -16,7 +16,7 @@
 
             <!-- IMAGE HANDLER -->          
            <div v-bind:style="{ transform: 'scale(' + scale + ')' }">
-              <vue-draggable-resizable :h="height_comp" :scale="scale">
+              <vue-draggable-resizable :h="height_comp" :scale="scale" :x="x" :y="y">
                <img src="../assets/46462438_1572546156223211_4054682576076406784_o.jpg" class="w3-round" alt="OldSarphati">
               </vue-draggable-resizable>
            </div>
@@ -29,7 +29,7 @@
 
            
            <!-- CAMERA BUTTON -->
-           <button id="vid-capture-button">
+           <button id="vid-capture-button" @click="captureWebCamButton()">
              <i id="yes-camera" class="fas fa-camera-retro fa-3x"></i>
              <span id="no-camera" class="fa-stack fa-lg">
                <i class="fa fa-camera-retro fa-stack-1x fa-2x"></i>
@@ -40,7 +40,7 @@
 
       
           <!-- COMPASS -->
-           <button id="compass">
+           <button id="compass" @click="captureDirectionButton()">
              <i class="fas fa-compass fa-3x"></i>
            </button>
     </div>
@@ -53,16 +53,27 @@ import Vue from 'vue';
 export default {
   data() {
     return {
-      //initwidth: document.querySelector(".w3-round")? document.querySelector(".w3-round").width:-1,
-      //initheight: document.querySelector(".w3-round")? document.querySelector(".w3-round").height:-1,
       scale: 1.,
+      x: 0,
+      y:0,
+      videoplay: false,
+      video:'',
+      webcamplay: false,
+      webcamp: '',
+      webcampconstrains: {
+                           video: true
+                  },
+      devorienteventName: '',
+      compassicon: '',
+      compassactive: false,
+      bodyborder: '',
     }
   },
    computed:{
-      //height_comp(){return this.initheight? (this.initheight+20):(Number(localStorage.getItem("locstoheight"))+20)},
       height_comp(){return Number(localStorage.getItem("locstoheight"))+20},
 
    },
+   
    
    created(){
          /*
@@ -78,15 +89,21 @@ export default {
          1. make some css pre-formatting
          2. make a variable to obtain the initial value of the image from `document` at the moment of creation
          3. save immediately the value in localStorage
-         4. create a computed property that check validity of an init value, otherwise check localStorage
+         4. create a computed property that check validity of localStorage
          */
       //console.log(document.querySelector('img'));
          if (document.querySelector(".w3-round")) {
             //code
             localStorage.setItem("locstoheight", document.querySelector(".w3-round").height);
-            console.log(111, document.querySelector(".w3-round").height, this.height_comp);
+
          };
    },
+   
+   mounted(){
+            this.x = .5*(window.innerWidth - document.querySelector(".w3-round").width);
+            this.y = .5*(window.innerHeight + document.querySelector(".w3-round").height);     
+      },
+
   
       methods:{
           openNav() {
@@ -97,7 +114,165 @@ export default {
          closeNav() {
               document.getElementById("vid-mySidenav").style.width = "0";
               document.getElementById("vid-openmenu").style.zIndex = "1";
+            },
+            
+         //captureVideoButton() {
+         //      if (this.videoplay === false) {
+         //         code
+         //         this.video = document.getElementById('videostream');
+         //         if (!this.video.src) {
+         //            code
+         //            this.video.src = 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4';
+         //         }
+         //         this.video.play();
+         //         document.getElementById('capture-button').remove();
+         //         document.getElementById('yes-camera').style.display = 'none';
+         //         document.getElementById('no-camera').style.display = 'inline-block';
+         //         this.videoplay = true;
+         //       }else{
+         //         this.video.pause();
+         //         document.getElementById('no-camera').style.display = 'none';
+         //         document.getElementById('yes-camera').style.display = 'inline-block';
+         //         this.videoplay = false;
+         //       }            
+         //   },
+         detectmob() { 
+             if( navigator.userAgent.match(/Android/i)
+             || navigator.userAgent.match(/webOS/i)
+             || navigator.userAgent.match(/iPhone/i)
+             || navigator.userAgent.match(/iPad/i)
+             || navigator.userAgent.match(/iPod/i)
+             || navigator.userAgent.match(/BlackBerry/i)
+             || navigator.userAgent.match(/Windows Phone/i)
+             ){
+                return true;
+              }
+             else {
+                return false;
+              }
+         },
+         captureWebCamButton() {
+            let zelf = this;
+            
+            let mob = this.detectmob();
+            this.webcamp = document.getElementById('videostream');
+            
+            //function handleSuccess(stream) {
+            //   zelf.webcam.srcObject = stream;
+            //   zelf.webcamplay = true;
+            // };
+            
+            function handleSuccess(stream){
+                            //OJO I had problems manipulating document from here, so I set for a simpler solution
+                           this.webcamp = document.querySelector('video');
+                           this.webcamp.srcObject = stream;
+                           document.querySelector("#vid-capture-button").style.color = "red";
+                           this.webcamplay = true;
+                           var z = this;
+                           this.webcamp.onloadedmetadata = function(e) {
+                                                         z.webcamp.play();
+                                                    };              
+            
+            };
+             
+             function handleError(error) {
+               alert('Error: ' + error);
+             };
+            
+            if(this.webcamplay === false){
+               if (mob) {
+                  //console.log(1111); 
+                  navigator.mediaDevices.getUserMedia( { video: { facingMode: { exact: "environment" } }, audio:false } )
+                     .then(handleSuccess.bind(this))
+                     .catch(handleError);
+               }else if (!mob){
+                  //console.log(2222); 
+                  navigator.mediaDevices.getUserMedia({video:true, audio:false})
+                     .then(handleSuccess.bind(this))
+                     .catch(handleError);
+               };
+            }else{
+               //https://stackoverflow.com/questions/11642926/stop-close-webcam-which-is-opened-by-navigator-getusermedia
+               
+               this.webcamp.srcObject
+                     .getTracks()
+                     .forEach(function(track) {
+                           track.stop();
+                           zelf.webcam = document.querySelector('video');
+                           zelf.webcam.srcObject = null;
+                           zelf.webcamplay = false;
+                           document.querySelector("#vid-capture-button").style.color = "black";
+                           
+                           //document.getElementById('no-camera').style.display = 'none';
+                           //document.getElementById('yes-camera').style.display = 'inline-block';
+                     });
             }
+         },
+            
+         orientationVarInit() {
+               //** html elements
+               this.bodyborder = document.querySelector('#vid-outerContainer');
+               this.compassicon =  document.querySelector('#compass');
+               
+               //** device orientation type
+               if ('ondeviceorientationabsolute' in window) {
+                   this.devorienteventName = 'deviceorientationabsolute';
+                   //alert(devorienteventName);
+               }else if ('ondeviceorientation' in window) {
+                   this.devorienteventName = 'deviceorientation';
+                   //alert(devorienteventName);
+               } else {
+                   this.devorienteventName = '';
+                   console.error('Compass not supported');
+                   //alert('Compass not supported');
+               };
+           
+               if ('onorientation' in window || 'orientation' in window) {
+                  //TODO
+               }
+               
+            },
+            
+         captureDirectionButton() {
+                function __handlerOrientation(event){
+                     //console.log(222);
+                     
+                     var alpha = event.alpha; //z
+                     var beta = event.beta; //x
+                     var gamma = event.gamma; //y
+                     var absolute = event.absolute? event.absolute:"undefined?";
+                     
+                     var rad = Math.PI/180;
+               
+                     if (!alpha||!beta||!gamma) {
+                       //code
+                       alpha = beta = gamma = 0;
+                     }
+                     
+                     console.log(this);
+                     
+                     this.bodyborder.style.borderColor = cscale[Math.trunc(Math.cos(Math.abs(alpha)*Math.PI/180)*10) > 9? 9:Math.round(Math.cos(Math.abs(alpha)*Math.PI/180)*10)];
+
+                 };
+               
+            
+               if (!this.compassactive) {
+                  //code
+                  this.orientationVarInit();
+                  this.bodyborder.style.borderStyle = 'solid';
+                  this.bodyborder.style.borderWidth = '15px';
+                  window.addEventListener(this.devorienteventName, __handlerOrientation.bind(this), true);
+                  this.compassicon.style.color = 'red'
+              }else{
+                  this.orientationVarInit();
+                  this.bodyborder.style.borderStyle = 'none';
+                  this.bodyborder.style.borderWidth = '0px';
+                  window.removeEventListener(this.devorienteventName, __handlerOrientation.bind(this));
+                  this.compassicon.style.color = 'black'
+              };
+              
+              this.compassactive = !this.compassactive;
+            },
 
                 
       },
@@ -107,12 +282,15 @@ export default {
    
 #outerContainer{
       font-family: "Lato", sans-serif;
-      color: orange;
+      /*color: orange;*/
     }
     
     #videostream{
         position: relative;
         background-color: #333;
+        height: 99vh;
+        touch-action: none;
+        user-select: none;
     }
     
     
@@ -243,7 +421,7 @@ export default {
   #compass{
         position: absolute;
         bottom:15px;
-        right:15px;
+        right:25px;
         z-index: 1;
   }
    
@@ -252,12 +430,12 @@ export default {
     top: 10px;
     height: 24px;
     padding: 12px 0;
-    width: 30%;
+    width: 17%;
     border-top: 1px solid #999;
     background-color: #CCC;
     z-index: 999;
     display:block;
-    right:30px;
+    right:10px;
    }
 </style>
 
