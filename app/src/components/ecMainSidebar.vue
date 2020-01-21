@@ -142,6 +142,8 @@
     max-height:730px;*/
     flex: 1 1 0;
     overflow-y:scroll;
+    padding-top: 20px;
+    padding-bottom: 120px;
 }
 
 

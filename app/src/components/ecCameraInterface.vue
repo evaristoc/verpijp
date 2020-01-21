@@ -381,17 +381,21 @@ export default {
       background-color: rgb(245, 230, 99);
       border: 10px solid rgba(136, 136, 136, .5);
       /*border-radius: 50%;*/
+      opacity:.7;
       touch-action: none;
       user-select: none;
     }
     
     .vdr:hover {
       cursor: grab;
-      border-width: 20px;
+      opacity:.5;
+      border-color:'blue';   
+      /*border-width: 20px;*/
     }
 
     .vdr:active {
       cursor: grabbing;
+      opacity:.5;
       background-color: rgba(168, 218, 220, 1.00);
     }
     
@@ -430,7 +434,7 @@ export default {
     top: 10px;
     height: 24px;
     padding: 12px 0;
-    width: 17%;
+    width: 25%;
     border-top: 1px solid #999;
     background-color: #CCC;
     z-index: 999;

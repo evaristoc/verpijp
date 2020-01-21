@@ -47,7 +47,7 @@
         type: Number,
         default() {
           //return 15
-          return 18
+          return 17
         }
       },
       'mapstyle': null
@@ -142,12 +142,16 @@
               modal.classList.add('show');
         };
         
+                    
+        //I substituted the following for future changes            
+        //<tr><td><a href="/#/testcamera?q=${d.picture}"><strong>foto overlap (experimental)</strong></a></td></tr>
+
         var contentString = `
             <div id="content">
                 <div id="siteNotice"></div>
                 <table>
                     <tr><td><button onclick="openModal_map('${d.picture}')"><strong>foto</strong></button></td></tr>
-                    <tr><td><a href="/#/testcamera?q=${d.picture}"><strong>foto overlap (experimental)</strong></a></td></tr>
+                    <tr><td><a href="/#/testcamera?q=TEST"><strong>foto overlap (experimental)</strong></a></td></tr>
                     <tr><td><strong>year</strong></td><td>${d.year}</td></tr>
                     <tr><td><strong>est.address</strong></td><td>${d.street}</td></tr>
                     <tr><td><strong>bron</strong></td><td><a href="https://www.facebook.com/PrentenVanWeleerAmsterdamDePijp/">Postcards from de Pijp</a></td></tr>
