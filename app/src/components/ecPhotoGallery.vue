@@ -74,6 +74,7 @@
                   transLocation:[],
                   search: '',
                   racking: false,
+                  getlost: 1,
                 };
         },
        
@@ -93,11 +94,25 @@
                 }
                 l = this.locations.filter(loc => {
                         //console.log(loc)
-                        let nosearch = this.search ==='' || this.search ===' '
-                        if (nosearch) {
-                            return true
+                        let nosearch = this.search ==='' || this.search ===' ';
+                        window.EventBus.$on('yeslost', function(d){
+                              this.getlost = d.where;
+                              console.log(2222, this.getlost)
+                         })
+                        console.log(1111, window.EventBus.getlost, loc.getlost, this.getlost);
+                        if (loc.getlost == parseInt(window.EventBus.getlost)) {
+                         //code
+                              if (nosearch) {
+                                  return true
+                              }
+                              
+                              return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
                         }
-                        return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+                        //if (nosearch && (5 == loc.getlost)) {
+                        //    return true
+                        //}
+                        //
+                        //return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
                     })
         
                

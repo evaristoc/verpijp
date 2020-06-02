@@ -8,7 +8,9 @@
              <a href="javascript:void(0)" class="vid-closemenu" @click="closeNav()">&times;</a>
              <a href="#">Photo Story</a>
              <a href="#">Tutorial</a>
-             <a href="#">Back to Main</a>
+             <!--<a href="#">Back to Main</a>-->
+             <a @click="gettingLost()" inactive>Want to get "lost"?</a>
+             <router-link to="/gallery">Map</router-link>
            </div>
            
            <!-- BURGER -->
@@ -17,7 +19,8 @@
             <!-- IMAGE HANDLER -->          
            <div v-bind:style="{ transform: 'scale(' + scale + ')' }">
               <vue-draggable-resizable :h="height_comp" :scale="scale" :x="x" :y="y">
-               <img src="../assets/46462438_1572546156223211_4054682576076406784_o.jpg" class="w3-round" alt="OldSarphati">
+              <!-- <img src="../assets/46462438_1572546156223211_4054682576076406784_o.jpg" class="w3-round" alt="OldSarphati">-->
+              <img :src="newpicture" class="w3-round" alt="OldSarphati">
               </vue-draggable-resizable>
            </div>
 
@@ -48,7 +51,10 @@
 </template>
 <script>
 import Vue from 'vue';
+////need to reload so the query of the page is assigned: https://michaelnthiessen.com/force-re-render/
+//Vue.forceUpdate(); //fails -> raise an error
 
+import {verdata} from '../assets/verpijptest.js';
 
 export default {
   data() {
@@ -67,11 +73,22 @@ export default {
       compassicon: '',
       compassactive: false,
       bodyborder: '',
+      pitem:this.$route.query.q,
+      vd: verdata.output,
     }
   },
    computed:{
       height_comp(){return Number(localStorage.getItem("locstoheight"))+20},
+      newitem(){return this.$route.query.q},
+      newpicture(){return this.vd[this.newitem]?this.vd[this.newitem].picture:'';},
+      
 
+   },
+   
+   watch:{
+      pitem:(val2, val1)=>{
+               console.log(val1, val2)
+            },   
    },
    
    
@@ -249,7 +266,7 @@ export default {
                        alpha = beta = gamma = 0;
                      }
                      
-                     console.log(this);
+                     //console.log(this);
                      
                      this.bodyborder.style.borderColor = cscale[Math.trunc(Math.cos(Math.abs(alpha)*Math.PI/180)*10) > 9? 9:Math.round(Math.cos(Math.abs(alpha)*Math.PI/180)*10)];
 
@@ -272,6 +289,12 @@ export default {
               };
               
               this.compassactive = !this.compassactive;
+            },
+         
+         gettingLost(){
+               window.EventBus.$emit("yeslost", {where:this.$route.query.q});
+               console.log(333, window.EventBus.getlost);
+               this.$router.push('/gallery');
             },
 
                 
@@ -381,21 +404,21 @@ export default {
       background-color: rgb(245, 230, 99);
       border: 10px solid rgba(136, 136, 136, .5);
       /*border-radius: 50%;*/
-      opacity:.7;
+      opacity:.8;
       touch-action: none;
       user-select: none;
     }
     
     .vdr:hover {
       cursor: grab;
-      opacity:.5;
+      opacity:.7;
       border-color:'blue';   
       /*border-width: 20px;*/
     }
 
     .vdr:active {
       cursor: grabbing;
-      opacity:.5;
+      opacity:.6;
       background-color: rgba(168, 218, 220, 1.00);
     }
     

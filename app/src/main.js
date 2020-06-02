@@ -48,7 +48,8 @@ window.EventBus = new Vue({
     data() {
         return {
             //depijpcenter: {"lat":52.353056, "lng": 4.896111}
-            depijpcenter: { "lat": 52.354200, "lng": 4.896411 }
+            depijpcenter: { "lat": 52.354200, "lng": 4.896411 },
+            getlost: 1,
         };
     }
 });
