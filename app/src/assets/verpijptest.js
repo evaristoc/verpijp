@@ -66,12 +66,30 @@ let data = [
 {imgid: 26, fotolink:'https://i.ibb.co/GW0JMLL/36834703-1438786799599148-3308086413852934144-n.jpg',fotolinkM:'testcamera',estyear:'1903',estaddress:'Sarphatipark',address:'Sarphatipark 97',location:'4.8981705,52.3555075',src:'Postcards from De Pijp', getlost:1},
 //{imgid: 27, fotolink:'https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/31491349_1367208826756946_2109525173690104175_n.jpg?_nc_cat=103&_nc_ohc=J0VXgoX3izUAQmsXmA_9m1w9ieBihpXpbjTrpVjBOH2JyUwbQDqsGyUyg&_nc_ht=scontent-amt2-1.xx&oh=ceb011473649e212f6d484eefd514d52&oe=5E489AC3',fotolinkM:'testcamera',estyear:'1981',estaddress:'Ceintuurbaan',address:'Ceintuurbaan 338',location:'4.8917324,52.3529759',src:'Postcards from De Pijp'},
 //{imgid: 28, fotolink:'https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-9/31710997_1368293129981849_7538207938737048202_n.jpg?_nc_cat=109&_nc_ohc=UImRHcsKs50AQlzrAtV_eYaqFdjeTpEaLyvHR6chvONLrbeeBeXi4uRpQ&_nc_ht=scontent-amt2-1.xx&oh=c0e7827a5568d95f2e3c968b643ad06b&oe=5E7BFCD3',fotolinkM:'testcamera',estyear:'1957',estaddress:'Ceintuurbaan',address:'Ceintuurbaan 338',location:'4.8918324,52.3530759',src:'Postcards from De Pijp'},
-{imgid: 29, fotolink:'https://i.ibb.co/rQF7X70/73524538-1933956336748856-7694439992457691136-o.jpg',fotolinkM:'testcamera',estyear:'1903',estaddress:'Sarphatipark',address:'Sarphatipark ooste brug',location:'4.8975701,52.3546689',src:'Postcards from De Pijp', getlost:1},
-{imgid: 30, fotolink:'https://i.ibb.co/GpgX6kk/71673398-1884247855053038-4462119632089645056-o.jpg', fotolinkM:'testcamera',estyear:'1926',estaddress:'Sarphatipark',address:'Sarphatipark XXX', location:'0.,0.',src:'Postcards from De Pijp', getlost:1},
-{imgid: 31, fotolink:'https://i.ibb.co/xSw6TvC/96782129-2146377135506774-303116668375138304-o.jpg', fotolinkM:'testcamera',estyear:'1896',estaddress:'Sarphatipark',address:'Sarphatipark XXX', location:'0.,0.',src:'Postcards from De Pijp', getlost:1}, 
-{imgid: 32, fotolink:'https://i.ibb.co/Pz92dT8/92124460-2107041329440355-4292891692924665856-o.jpg', fotolinkM:'testcamera',estyear:'1926',estaddress:'Sarphatipark',address:'Sarphatipark XXX', location:'0.,0.',src:'Postcards from De Pijp', getlost:1},
-{imgid: 33, fotolink:'https://i.ibb.co/rbFLBGk/78590459-1956572267820596-5756755219010551808-o.jpg', fotolinkM:'testcamera',estyear:'1926',estaddress:'Sarphatipark',address:'Sarphatipark XXX', location:'0.,0.',src:'Postcards from De Pijp', getlost:1},
+{imgid: 29, fotolink:'https://i.ibb.co/rQF7X70/73524538-1933956336748856-7694439992457691136-o.jpg',fotolinkM:'testcamera',estyear:'1903',estaddress:'Sarphatipark',address:'Sarphatipark ooste brug',location:'4.8981105,52.3547897',src:'Postcards from De Pijp', getlost:1},
+{imgid: 30, fotolink:'https://i.ibb.co/GpgX6kk/71673398-1884247855053038-4462119632089645056-o.jpg', fotolinkM:'testcamera',estyear:'1926',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.8980505,52.3554075',src:'Postcards from De Pijp', getlost:1},
+{imgid: 31, fotolink:'https://i.ibb.co/xSw6TvC/96782129-2146377135506774-303116668375138304-o.jpg', fotolinkM:'testcamera',estyear:'1896',estaddress:'Sarphatipark',address:'Sarphati Monument', location:'4.8955741,52.3544473',src:'Postcards from De Pijp', getlost:1}, 
+{imgid: 32, fotolink:'https://i.ibb.co/Pz92dT8/92124460-2107041329440355-4292891692924665856-o.jpg', fotolinkM:'testcamera',estyear:'1926',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.8960476,52.3543612',src:'Postcards from De Pijp', getlost:1},
+{imgid: 33, fotolink:'https://i.ibb.co/rbFLBGk/78590459-1956572267820596-5756755219010551808-o.jpg', fotolinkM:'testcamera',estyear:'1909',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.898305,52.3546897',src:'Postcards from De Pijp', getlost:1},
+{imgid: 34, fotolink:'https://i.ibb.co/rG7LnsP/edb5d2e6cf9eef2e3662a6a19449d82c-Jacob-Olie.jpg', fotolinkM:'testcamera',estyear:'1896',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.8957996,52.35377000',src:'Pinterest', getlost:1},
+{imgid: 35, fotolink:'https://i.ibb.co/Dg8YwbT/1001004005311508-2-sarphatipark-Heida-Boek.jpg', fotolinkM:'testcamera',estyear:'1930?',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.897305,52.3546897',src:'Sarphatipark (Heida Boek)', getlost:1},
+{imgid: 36, fotolink:'https://i.ibb.co/TTbMzVV/moedersmetkinderenwagensarphatipark.jpg', fotolinkM:'testcamera',estyear:'1960?',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.897905,52.354400',src:'Amsterdam Stadsarchief', getlost:1},
+{imgid: 37, fotolink:'https://i.ibb.co/417W2QV/96686857-2147572285387259-1397301557451554816-o.jpg', fotolinkM:'testcamera',estyear:'1901',estaddress:'Sarphatipark',address:'Sarphatipark', location:'4.8990891,52.3542481',src:'Postcards from De Pijp', getlost:1},
+
 ]
+
+//sarphatipark geschiedenis
+//https://www.wijkcentrumdepijp.nl/de-pijp/berichten/news/de-verhalen-van-de-pijp-liggen-verborgen-achter-de-gevels/?tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Baction%5D=detail&cHash=bdf35e903cc7571d98432ab2cb72bb0c
+//https://nmtzuid.nl/wp-content/uploads/2015/02/bomenwandeling-sarphatipark240513.pdf
+//https://ontdekdepijp.nl/wp-content/uploads/2017/04/wandelroutedepijplageresolutienl.pdf
+//https://www.ivn.nl/afdeling/ivn-natuur-in-amsterdam/activiteiten/ontdek-het-sarphatipark
+//https://nl.wikipedia.org/wiki/Lies_Visserbrug
+//https://nl.wikipedia.org/wiki/Plan_Zuid
+//http://depijpinbeeld.blogspot.com/2020/
+//https://www.geheugenvanplanzuid.nl/index.php/architectuur/266-religie-de-ketters-van-de-overkant?tmpl=component&amp;amp;print=1&amp;amp;page=
+//https://www.inzuid.amsterdam/index.php/category/geschiedenis-en-herdenkingen/
+//https://www.google.com/imgres?imgurl=https%3A%2F%2Falbertcuyp-markt.amsterdam%2Fwp-content%2Fuploads%2F2019%2F06%2F6-1.jpg&imgrefurl=https%3A%2F%2Falbertcuyp-markt.amsterdam%2Fover-ons%2F&docid=0Mo8cYg1vZ7YEM&tbnid=BzArla463ohdFM%3A&vet=1&w=360&h=600&itg=1&bih=937&biw=1347&ved=2ahUKEwiOxLanxuXpAhXP2qQKHb8lDYEQxiAoBHoECAEQIg&iact=c&ictx=1
+//https://www.bol.com/nl/p/het-sarphatipark/1001004005311508/?bltg=itm_event%3Dclick%26mmt_id%3DXteAti92xN8DR4X5jSXeoAAAAP0%26slt_type%3Drecommendations%26pg_nm%3Dpdp%26slt_id%3Dprd_reco%26slt_nm%3Dproduct_recommendations%26slt_pos%3DC1%26slt_owner%3Dccs%26itm_type%3Dproduct%26itm_lp%3D1%26itm_id%3D1001004005311508&bltgh=uqM2T873mRtgWDC1FCJENg.1_7_8.9.ProductImage
 
 const text = [
     {imgid: 20},
