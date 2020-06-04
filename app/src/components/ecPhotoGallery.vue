@@ -24,34 +24,45 @@
         </div><!-- COMPONENT Modal END-->
 
 
-        <!-- COMPONENT toggler-nav START -->
-        <div id="toggler-nav">
-            <a href="javascript:void(0)" id="closebtn" @click="closeNav()">Go to Map</a>
-        </div> <!-- COMPONENT toggler-nav END -->
-                  <div id="nav-ctrls" class="container">
-                    <div class="row">
-                        <div id="upperctr">
-                            <input id="searchfilter" class="sidebar-upperctr-elem" type="text" v-model="search" placeholder="Search street and/or year">
+          <!-- COMPONENT toggler-nav START -->
+          <div id="toggler-nav">
+              <a id="closebtn"  href="javascript:void(0)" @click="closeNav()">Go to Map</a>
+          </div> <!-- COMPONENT toggler-nav END -->
+          <div id="nav-ctrls" class="container">
+            <div class="row">
+                <div id="upperctr">
+                    <input id="searchfilter" class="sidebar-upperctr-elem" type="text" v-model="search" placeholder="Search street and/or year">
+                </div>
+                <div>
+                    <button @click="selAllMarkers" class="btn btn-outline-warning sidebar-upperctr-elem" id="clearingbtn">Select all</button>
+                    <button @click="clearAllMarkers" class="btn btn-outline-warning sidebar-upperctr-elem" id="clearingbtn">Clear all</button>
+                </div>
+                <button id="trackingbtn" class="btn btn-outline-warning" @click=trackingAllowed() style="margin-left:5px;">Tracking?</button>
+            </div>
+          </div><!-- COMPONENT nav-ctrls END -->
+          <!-- COMPONENT gallery START -->
+          <div id="sel-gallery" class="content-fluid">
+               <div class="grid" v-if="filteredLocationsLost.length > 0">
+                    <h3>Get Lost!</h3>
+                     <div class="cell" v-for="loc in filteredLocationsLost">
+                        <div class="item-title">
+                            <img style="width:100px;height:100px;margin-left:20px;" @click="openModal(loc)" :id="idConcat(loc.itemid+'_img')" :src=loc.picture class="responsive-image">
+                            </br>
+                            <button @click="cltMarker($event)" type="button" :id="idConcat(loc.itemid)" :value="loc.itemid" class="btn btn-street" :class="loc.sel? 'btn-outline-secondary':'btn-outline-info'">{{loc.street}}, {{loc.year}}</button>
                         </div>
-                        <div>
-                            <button @click="selAllMarkers" class="btn btn-outline-warning sidebar-upperctr-elem" id="clearingbtn">Select all</button>
-                            <button @click="clearAllMarkers" class="btn btn-outline-warning sidebar-upperctr-elem" id="clearingbtn">Clear all</button>
-                        </div>
-                        <button id="trackingbtn" class="btn btn-outline-warning" @click=trackingAllowed() style="margin-left:5px;">Tracking?</button>
                     </div>
-                </div><!-- COMPONENT nav-ctrls END -->
-            <!-- COMPONENT gallery START -->
-            <div id="sel-gallery" class="content-fluid">
-                  <div class="grid">
-                      <div class="cell" v-for="loc in filteredLocations">
-                          <div class="item-title">
-                              <img style="width:100px;height:100px;margin-left:20px;" @click="openModal(loc)" :id="idConcat(loc.itemid+'_img')" :src=loc.picture class="responsive-image">
-                              </br>
-                              <button @click="cltMarker($event)" type="button" :id="idConcat(loc.itemid)" :value="loc.itemid" class="btn btn-street" :class="loc.sel? 'btn-outline-secondary':'btn-outline-info'">{{loc.street}}, {{loc.year}}</button>
-                          </div>
-                      </div>
-                  </div>
-              </div><!-- COMPONENT gallery END -->
+                </div>
+                <div class="grid">
+                   <h3>Sarphatipark Route {{getlostC}}</h3>
+                    <div class="cell" v-for="loc in filteredLocations">
+                        <div class="item-title">
+                            <img style="width:100px;height:100px;margin-left:20px;" @click="openModal(loc)" :id="idConcat(loc.itemid+'_img')" :src=loc.picture class="responsive-image">
+                            </br>
+                            <button @click="cltMarker($event)" type="button" :id="idConcat(loc.itemid)" :value="loc.itemid" class="btn btn-street" :class="loc.sel? 'btn-outline-secondary':'btn-outline-info'">{{loc.street}}, {{loc.year}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- COMPONENT gallery END -->
       </div> <!-- COMPONENT wrap-data-area END -->
 </template>
 <script>
@@ -87,6 +98,39 @@
       },
        
         computed:{
+
+            getlostC(){
+               return parseInt(window.EventBus.getlost)
+            },
+            
+            filteredLocationsLost(){ //filtered items/markers
+                console.log(444);
+                let l;
+                if (!this.locations.length) {
+                    return [];
+                }
+                l = this.locations.filter(loc => {
+                        window.EventBus.$on('yeslost', function(d){
+                              this.getlost = d.where;
+                              console.log(2222, this.getlost)
+                         })
+                        console.log(1111, window.EventBus.getlost, loc.getlost, this.getlost);
+                        //this.getlost = parseInt(window.EventBus.getlost);
+                        if (loc.getlost != 1 && loc.getlost == parseInt(window.EventBus.getlost)) {
+                                  return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+                        }
+                        //if (nosearch && (5 == loc.getlost)) {
+                        //    return true
+                        //}
+                        //
+                        //return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+                    })
+        
+               
+                return l;
+                
+            },
+            
             filteredLocations(){ //filtered items/markers
                 let l;
                 if (!this.locations.length) {
@@ -95,12 +139,10 @@
                 l = this.locations.filter(loc => {
                         //console.log(loc)
                         let nosearch = this.search ==='' || this.search ===' ';
-                        window.EventBus.$on('yeslost', function(d){
-                              this.getlost = d.where;
-                              console.log(2222, this.getlost)
-                         })
-                        console.log(1111, window.EventBus.getlost, loc.getlost, this.getlost);
-                        if (loc.getlost == parseInt(window.EventBus.getlost)) {
+                        //window.EventBus.$on('yeslost', function(d){
+                        //      this.getlost = d.where;
+                        // })
+                        if (loc.getlost == 1) {
                          //code
                               if (nosearch) {
                                   return true
@@ -222,3 +264,5 @@
         }
     }
 </script>
+<style>
+</style>

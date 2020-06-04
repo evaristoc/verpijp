@@ -185,7 +185,7 @@
  
 #mySidenav #closebtn {
   padding: 8px 8px 8px 32px;
-  position: absolute;
+  position: fixed;
   display: block;
   top: 0px;
   right: 15px;

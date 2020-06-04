@@ -9,8 +9,9 @@
              <a href="#">Photo Story</a>
              <a href="#">Tutorial</a>
              <!--<a href="#">Back to Main</a>-->
-             <a @click="gettingLost()" inactive>Want to get "lost"?</a>
-             <router-link to="/gallery">Map</router-link>
+             <a href='./#/gallery' @click="gettingLost()">Want to get "lost"?</a>
+             <a href="./#/gallery">Go To Map</a>
+             <!--<router-link to="/gallery">Map</router-link>--> <!-- because not defined as the rest, requires a specific styling - silly... -->
            </div>
            
            <!-- BURGER -->
@@ -292,7 +293,7 @@ export default {
             },
          
          gettingLost(){
-               window.EventBus.$emit("yeslost", {where:this.$route.query.q});
+               window.EventBus.$emit("yeslost", {where:this.$route.query.gl});
                console.log(333, window.EventBus.getlost);
                this.$router.push('/gallery');
             },
@@ -371,6 +372,10 @@ export default {
       
       .vid-sidenav a:hover {
         color: #f1f1f1;
+      }
+      
+      .vid-sidenav a:visited {
+        color: #818181;
       }
       
       .vid-sidenav .vid-closemenu {
