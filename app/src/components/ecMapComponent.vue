@@ -182,12 +182,28 @@
         modal.classList.remove('show');
         modal.style.display = "none";
       },
+      iconType(t) {
+            if (t == "show") {
+                //code
+                return "http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png"
+            }else if (t == "hist") {
+                //code
+                return "http://icons.iconarchive.com/icons/icons8/ios7/32/Cinema-History-icon.png"
+            }else if (t == "game") {
+                //code
+                return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+            }else if (t == "expand") {
+                //code
+                return "http://icons.iconarchive.com/icons/icons8/ios7/32/Editing-Expand-icon.png"
+            }
+        },
       makeMarker(d, mymark=false) {
         let zelf = this;
         let m = new window.google.maps.Marker({
           position: new window.google.maps.LatLng(d.lat, d.lng),
           //icon: require('../assets/googlecamerablue.png'),//
-          icon: !mymark?"http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png":{path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#00CCFF', fillOpacity: 0.8, strokeWeight: 1},
+          //icon: !mymark?"http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png":{path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#00CCFF', fillOpacity: 0.8, strokeWeight: 1},
+          icon: !mymark?this.iconType(d.useas):{path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#00CCFF', fillOpacity: 0.8, strokeWeight: 1},
           map: zelf.$map,
           //title: !mymark?d.street:'ME',
         })
