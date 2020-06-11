@@ -2,11 +2,33 @@
    <div id="vid-outerContainer">
        <video id="videostream" class="vid-containers" type="video/webm"></video>
        <div id="video-overlay" class="vid-containers">
+            <!-- MODAL START -->
+            <div class="modal fade" id="myModal_map" style="background-color: rgba(0, 0, 0, 0.6);">
+                  <!-- REFERENCES -->
+                  <!--https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_modal&stacked=h-->
+                  <!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img-->
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                  <div class="modal-content mb-0 p-0" style="background-color: rgba(255, 255, 255, 0.6);">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="btn btn-warning close-modal" @click="closeModal()">&times;</button>
+                     </div>
+                    <!-- Modal body -->
+                    <div class="modal-body container-fluid">
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                      <h5 id="modal-title_map" style="color:blue"></h5>
+                    </div>
+                  </div>
+                </div>
+            </div>
+           <!-- MODAL END -->
            
            <!-- SIDEBAR MENU -->
            <div id="vid-mySidenav" class="vid-sidenav">
              <a href="javascript:void(0)" class="vid-closemenu" @click="closeNav()">&times;</a>
-             <a href="#">Photo Story</a>
+             <a href="#" @click="openModal('story')">Photo Story</a>
              <a href="#">Tutorial</a>
              <!--<a href="#">Back to Main</a>-->
              <a href='./#/gallery' @click="gettingLost()">Want to get "lost"?</a>
@@ -82,6 +104,7 @@ export default {
       height_comp(){return Number(localStorage.getItem("locstoheight"))+20},
       newitem(){return this.$route.query.q},
       newpicture(){return this.vd[this.newitem]?this.vd[this.newitem].picture:'';},
+      newstreet(){return this.vd[this.newitem]?this.vd[this.newitem].street:'';},
       
 
    },
@@ -276,6 +299,7 @@ export default {
             
                if (!this.compassactive) {
                   //code
+                  this.openModal('help');
                   this.orientationVarInit();
                   this.bodyborder.style.borderStyle = 'solid';
                   this.bodyborder.style.borderWidth = '15px';
@@ -298,8 +322,45 @@ export default {
                this.$router.push('/gallery');
             },
 
+        openModal(event){
+              //console.log(event);
+              let title = '';
+              let content = '';
+              if (event == "help") {
+               //code
+               title = "Point to the North";
+               content = "Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum."
+               
+              }else if (event == "story") {
+               //code
+               title = this.newstreet;
+               content = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
+              }
+              
+              
+              let modal_title = document.getElementsByClassName('modal-title');
+              modal_title[0].innerHTML = title;
+              let modal_content = document.getElementsByClassName('modal-body');
+              modal_content[0].innerHTML = content;
+              
+              let modal = document.getElementById('myModal_map');
+
+              modal.style.display = "block";
+              //modalImg.src = picture;
+              //captionText.innerHTML = loc.street+", "+loc.year;
+              modal.classList.add('show');
+        },
+        
+         closeModal(){
+           //let span = document.getElementsByClassName("close-modal")[0];
+           let modal = document.getElementById('myModal_map');
+           modal.classList.remove('show');
+           modal.style.display = "none";
+         },
                 
       },
+      
+
 }
 </script>
 <style>
