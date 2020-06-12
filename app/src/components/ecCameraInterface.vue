@@ -31,7 +31,7 @@
              <a href="#" @click="openModal('story')">Photo Story</a>
              <a href="#">Tutorial</a>
              <!--<a href="#">Back to Main</a>-->
-             <a href='./#/gallery' @click="gettingLost()">Want to get "lost"?</a>
+             <a :href="'./#/hunt?q='+newitem+'&gl='+newimgid" @click="gettingLost()">Wanna hunt?</a>
              <a href="./#/gallery">Go To Map</a>
              <!--<router-link to="/gallery">Map</router-link>--> <!-- because not defined as the rest, requires a specific styling - silly... -->
            </div>
@@ -105,7 +105,7 @@ export default {
       newitem(){return this.$route.query.q},
       newpicture(){return this.vd[this.newitem]?this.vd[this.newitem].picture:'';},
       newstreet(){return this.vd[this.newitem]?this.vd[this.newitem].street:'';},
-      
+      newimgid(){return this.vd[this.newitem]?this.vd[this.newitem].imgid:'';},
 
    },
    
@@ -319,7 +319,7 @@ export default {
          gettingLost(){
                window.EventBus.$emit("yeslost", {where:this.$route.query.gl});
                console.log(333, window.EventBus.getlost);
-               this.$router.push('/gallery');
+               //this.$router.push('/hunt');
             },
 
         openModal(event){

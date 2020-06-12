@@ -37,6 +37,8 @@ import GenAbout from '../components/ecGeneralAbout.vue'
 
 import CamInterf from '../components/ecCameraInterface.vue'
 
+import LandPageHunt from '../components/ecLPHunt.vue'
+
 export const routes = [
   {
     path: '',
@@ -61,6 +63,12 @@ export const routes = [
     path:'/testcamera',
     name: 'camera',
     component: CamInterf,
+  },
+  
+  {
+    path: '/hunt',
+    name: 'hunt',
+    component: LandPageHunt,
   },
 
   {
