@@ -31,13 +31,17 @@ References to keep around...
 
 import home from '../views/Home.vue';
 
+import lphunt from '../views/LPHunt.vue';
+
 import Gallery from '../components/ecPhotoGallery.vue'
 
 import GenAbout from '../components/ecGeneralAbout.vue'
 
 import CamInterf from '../components/ecCameraInterface.vue'
 
-import LandPageHunt from '../components/ecLPHunt.vue'
+import LandPageHunt from '../components/ecLPHuntsMain.vue'
+
+import Hunt from '../components/ecHunt.vue'
 
 export const routes = [
   {
@@ -66,9 +70,23 @@ export const routes = [
   },
   
   {
-    path: '/hunt',
-    name: 'hunt',
-    component: LandPageHunt,
+    path: '/hunts',
+    name: 'hunts',
+    component: lphunt,
+    children:[
+      {
+        path:'',
+      name: 'huntlist',
+      component: LandPageHunt,
+      children:[
+      ]
+      },
+      {
+          path:'hunt',
+          name: 'huntunit',
+          component: Hunt
+      },
+    ]
   },
 
   {

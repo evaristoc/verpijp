@@ -3,20 +3,26 @@
         <h3>HELLO HUNT</h3>
         <div class="container">
             <div class="row mt-1">
-                <div class="col-3">
+                <div class="col-6">
                     <img src="https://i.ibb.co/zbF6Kt9/8232820489-579018c1cd-b.jpg" class="float-left" width="100%">
                 </div>
-                <div class="col-5">
+            </div>
+            <div class="row mt-1">
+                <div class="col-12">
                     Tweede van der Helststraat (between 3-13): What is the name of the business with this window?
                 </div>
-                <div class="col-3">
+            </div>
+            <div class="row mt-1">
+                <div class="col-7">
                     <form>
                          <input type="text" class="form-control" id="entry">
                          <button class="btn btn-success" type="submit">Solution</button>
                     </form>
                 </div>
             </div>
-            <div class="row mt-1">
+        </div>
+    </div>
+            <!--<div class="row mt-1">
                 <div class="col-3">
                     <img src="https://i.ibb.co/RD2G05b/8442730616-6c74194f4a-b-pre.jpg" class="float-left" width="100%">
                 </div>
@@ -87,7 +93,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </template>
 <script>
     //TODO --- https://mdbootstrap.com/docs/jquery/forms/validation/

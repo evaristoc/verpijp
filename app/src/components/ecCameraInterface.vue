@@ -31,7 +31,7 @@
              <a href="#" @click="openModal('story')">Photo Story</a>
              <a href="#">Tutorial</a>
              <!--<a href="#">Back to Main</a>-->
-             <a :href="'./#/hunt?q='+newitem+'&gl='+newimgid" @click="gettingLost()">Wanna hunt?</a>
+             <a :href="'./#/hunts?q='+newitem+'&gl='+newimgid" @click="gettingLost()">Wanna hunt?</a>
              <a href="./#/gallery">Go To Map</a>
              <!--<router-link to="/gallery">Map</router-link>--> <!-- because not defined as the rest, requires a specific styling - silly... -->
            </div>
