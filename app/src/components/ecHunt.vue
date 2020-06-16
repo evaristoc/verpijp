@@ -97,4 +97,8 @@
 </template>
 <script>
     //TODO --- https://mdbootstrap.com/docs/jquery/forms/validation/
+    //-- https://stackoverflow.com/questions/43481237/bootstrap-4-form-validation
+    //-- https://vuelidate.js.org/#custom-validators
+    //TODO check the implementation of GUARDS
+    //TODO check to implement the question/answer section as an independent router-viewer with a shared header (see Max)
 </script>
