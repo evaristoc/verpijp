@@ -18,17 +18,17 @@ Vue.use(Vuelidate);
 //global components*****************
 import ecMapComponent from './components/ecMapComponent';
 import ecMainSidebar from './components/ecMainSidebar';
-import ecPhotoGallery from './components/ecPhotoGallery';
-import ecNavMainSidebar from './components/ecNavMainSidebar';
-import ecGeneralAbout from './components/ecGeneralAbout';
-import ecCamInterf from './components/ecCameraInterface.vue';
+//import ecPhotoGallery from './components/ecPhotoGallery'; //now in router
+import ecNavMainSidebar from './components/ecNavMainSidebar'; //this is actually a VIEW, however it is NESTED in HOME because the way I set the appearance of the sidebar!!
+//import ecGeneralAbout from './components/ecGeneralAbout'; //now in router
+//import ecCamInterf from './components/ecCameraInterface.vue'; //now in router
 
 Vue.component('ecMapComponent', ecMapComponent);
 Vue.component('ecMainSidebar', ecMainSidebar);
-Vue.component('ecPhotoGallery', ecPhotoGallery);
+//Vue.component('ecPhotoGallery', ecPhotoGallery);
 Vue.component('ecNavMainSidebar', ecNavMainSidebar);
-Vue.component('ecGeneralAbout', ecGeneralAbout);
-Vue.component('ecCamInterf', ecCamInterf);
+//Vue.component('ecGeneralAbout', ecGeneralAbout);
+//Vue.component('ecCamInterf', ecCamInterf);
 
 //third-party components*****************
 import VueDraggableResizable from 'vue-draggable-resizable';

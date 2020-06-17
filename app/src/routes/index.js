@@ -31,7 +31,7 @@ References to keep around...
 
 import home from '../views/Home.vue';
 
-import lphunt from '../views/LPHunt.vue';
+import lphunts from '../views/LPHunts.vue';
 
 import Gallery from '../components/ecPhotoGallery.vue'
 
@@ -72,7 +72,7 @@ export const routes = [
   {
     path: '/hunts',
     name: 'hunts',
-    component: lphunt,
+    component: lphunts,
     children:[
       {
         path:'',
