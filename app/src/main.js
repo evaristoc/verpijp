@@ -5,10 +5,14 @@ import App from './App.vue';
 //plugins*******************
 //routers*******************
 import VueRouter from 'vue-router';
-import {routes} from './routes'
+import {routes} from './routes';
 
 Vue.use(VueRouter);
 const router = new VueRouter({routes});
+
+//vualidate******************
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);
 
 
 //global components*****************
@@ -17,7 +21,7 @@ import ecMainSidebar from './components/ecMainSidebar';
 import ecPhotoGallery from './components/ecPhotoGallery';
 import ecNavMainSidebar from './components/ecNavMainSidebar';
 import ecGeneralAbout from './components/ecGeneralAbout';
-import ecCamInterf from './components/ecCameraInterface.vue'
+import ecCamInterf from './components/ecCameraInterface.vue';
 
 Vue.component('ecMapComponent', ecMapComponent);
 Vue.component('ecMainSidebar', ecMainSidebar);

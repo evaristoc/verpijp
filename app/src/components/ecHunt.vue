@@ -14,33 +14,11 @@
             </div>-->
             <div class="row mt-1">
                 <div class="col-7" role="group">
-                        <label for="input-live"> What is the name of the business with this window?</label>
-                        <b-form-input
-                          id="input-live"
-                          v-model="name"
-                          :state="nameState"
-                          aria-describedby="input-live-help input-live-feedback"
-                          placeholder="Enter your name"
-                          trim
-                        ></b-form-input>
-                    
-                        <!-- This will only be shown if the preceding input has an invalid state -->
-                        <b-form-invalid-feedback id="input-live-feedback">
-                          Enter at least 3 letters
-                        </b-form-invalid-feedback>
-                    
-                        <!-- This is a form text block (formerly known as help block) -->
-                        <b-form-text id="input-live-help">Your full name.</b-form-text>
-                    <!--<form>
-                         <input type="text" class="form-control" id="entry" pattern="GlouGlou" required>
-                        <div class="valid-feedback">
-                         Looks good!
-                       </div>
-                       <div class="invalid-feedback">
-                         Doesn't look good!
-                       </div>
+                    <form>
+                         <label for="input-live"> What is the name of the business with this window?</label>
+                         <input type="text" class="form-control" id="entry" v-model="$v.text.$model" :class="status($v.text)" required>
                          <button class="btn btn-success" type="submit">Solution</button>
-                    </form>-->
+                    </form>
                 </div>
             </div>
         </div>
@@ -124,4 +102,31 @@
     //-- https://vuelidate.js.org/#custom-validators
     //TODO check the implementation of GUARDS
     //TODO check to implement the question/answer section as an independent router-viewer with a shared header (see Max)
+    import Vue from 'vue';
+    import { required, sameAs } from 'vuelidate';
+  
+
+  
+   
+  export default {
+    data(){
+        return {
+            text: '',
+        };
+    },
+    computed:{
+        
+    },
+  validations: {
+  	text: {
+    	required,
+        sameAs: 
+    }
+  },
+  
+    methods: {
+
+    }
+  }
+    
 </script>
