@@ -17,8 +17,15 @@
 </template>
 
 <script>
+import ecMainSidebar from './ecMainSidebar';
+import ecMapComponent from '../components/ecMapComponent';      
+
 export default {
-  name: 'home',
+  name: 'home-view', //RELEVANT! Because registered as TOP in router, it will be rendered on APP `router-viewer`!! (this name not relevant for now...)
+  components:{
+      "ec-main-sidebar": ecMainSidebar,   //this is a view
+      "ec-map-component": ecMapComponent  //this is still a component
+      },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

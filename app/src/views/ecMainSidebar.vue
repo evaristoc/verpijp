@@ -8,9 +8,9 @@
       <!-- COMPONENT mySidebar START -->
       <div class="childsidenav" id="mySidenav">
         
-        <ec-nav-main-sidebar></ec-nav-main-sidebar> <!-- this component managed data; now centralized in corresponding component -->
+        <ec-main-sidebar-nav-routerlink></ec-main-sidebar-nav-routerlink> <!-- this is only a NAVIGATOR to toddle between Gallery or About -->
         
-        <router-view></router-view><!-- to GALLERY, ABOUT -->
+        <router-view></router-view><!-- this is where the CONTENT is rendered after navigating; I reach this content through the ROUTER -->
 
     </div> <!-- COMPONENT mySidebar END -->
     
@@ -21,13 +21,15 @@
 </template> <!-- COMPONENT template END -->
 <script>
   import Vue from 'vue';
-  
+  import ecMainSidebarnavrouterlink from './ecNavMainSidebar'; //this is the MENU or NAV!
 
   
    
   export default {
-   
-  
+   components: {
+            "ec-main-sidebar-nav-routerlink": ecMainSidebarnavrouterlink
+          },
+    
     methods: {
 
       openNav(){

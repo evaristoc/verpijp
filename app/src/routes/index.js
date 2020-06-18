@@ -29,19 +29,31 @@ References to keep around...
 
 */
 
-import home from '../views/Home.vue';
+//=========================================
 
-import lphunts from '../views/LPHunts.vue';
+import home from '../views/Home.vue'; //a component (I wont say it is a view...) that nests map, as well as main sidebar which nest sidebar (both actually the VIEWs in my opinion); all are PUBLIC (main.js)
 
-import Gallery from '../components/ecPhotoGallery.vue'
+//this two below are children of home
 
-import GenAbout from '../components/ecGeneralAbout.vue'
+import Gallery from '../components/ecPhotoGallery.vue' //a component that contains the whole utilities of the sidebar
 
-import CamInterf from '../components/ecCameraInterface.vue'
+import GenAbout from '../components/ecGeneralAbout.vue' //the About page
 
-import LandPageHunt from '../components/ecLPHuntsMain.vue'
+//=========================================
 
-import Hunt from '../components/ecHunt.vue'
+import CamInterf from '../components/ecCameraInterface.vue' //an apart component containing camera features
+
+//=========================================
+
+import lphunts from '../views/LPHuntsView.vue'; //viewer
+
+import LandPageHunt from '../components/ecLPHuntsMain.vue' //a list of links, so a navigator?
+
+import Hunt from '../views/ecHuntView.vue' //viewer
+
+import HuntQ from '../components/HuntQues.vue'
+
+import HuntS from '../components/HuntSol.vue'
 
 export const routes = [
   {
@@ -76,15 +88,26 @@ export const routes = [
     children:[
       {
         path:'',
-      name: 'huntlist',
-      component: LandPageHunt,
-      children:[
-      ]
+        name: 'huntlist',
+        component: LandPageHunt,
       },
       {
-          path:'hunt',
-          name: 'huntunit',
-          component: Hunt
+        path:'hunt',
+        name: 'huntunit',
+        component: Hunt,
+        children:[
+          {
+            path:'question',
+            name: 'huntquestion',
+            component: HuntQ
+          },
+          {
+            path:'answer',
+            name: 'huntanswer',
+            component: HuntS,
+            beforeEnter: (to, from, next)=>{ if(from.name == 'huntquestion'){ next() } else { next('hunts/hunt/question') } }
+          },          
+        ]
       },
     ]
   },

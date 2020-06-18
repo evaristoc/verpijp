@@ -16,17 +16,17 @@ Vue.use(Vuelidate);
 
 
 //global components*****************
-import ecMapComponent from './components/ecMapComponent';
-import ecMainSidebar from './components/ecMainSidebar';
+//import ecMapComponent from './components/ecMapComponent'; now called from HOME
+//import ecMainSidebar from './views/ecMainSidebar'; //changed to views, not more in components; now called from HOME
 //import ecPhotoGallery from './components/ecPhotoGallery'; //now in router
-import ecNavMainSidebar from './components/ecNavMainSidebar'; //this is actually a VIEW, however it is NESTED in HOME because the way I set the appearance of the sidebar!!
+//import ecNavMainSidebar from './components/ecNavMainSidebar'; //this is actually a VIEW OJO:NOW CALLED FROM ecMainSidebar component!!, however it is NESTED in HOME because the way I set the appearance of the sidebar!!
 //import ecGeneralAbout from './components/ecGeneralAbout'; //now in router
 //import ecCamInterf from './components/ecCameraInterface.vue'; //now in router
 
-Vue.component('ecMapComponent', ecMapComponent);
-Vue.component('ecMainSidebar', ecMainSidebar);
+//Vue.component('ecMapComponent', ecMapComponent);
+//Vue.component('ecMainSidebar', ecMainSidebar);
 //Vue.component('ecPhotoGallery', ecPhotoGallery);
-Vue.component('ecNavMainSidebar', ecNavMainSidebar);
+//Vue.component('ecNavMainSidebar', ecNavMainSidebar);
 //Vue.component('ecGeneralAbout', ecGeneralAbout);
 //Vue.component('ecCamInterf', ecCamInterf);
 

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row mt-1">
                 <div class="col-12">
-                    <a href="/#/hunts/hunt">Tweede van der Helststraat (between 3-13): What is the name of the business with this window?</a>
+                    <a href="/#/hunts/hunt/question">Tweede van der Helststraat (between 3-13): What is the name of the business with this window?</a>
                 </div>
             </div>
             <div class="row mt-1">
