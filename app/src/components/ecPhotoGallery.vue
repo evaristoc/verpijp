@@ -190,7 +190,7 @@
                    document.getElementById("mySidenav").style.width = "0px";
                    document.getElementById("menu-open-test").style.marginLeft = "0px";
                    document.getElementById("menu-open-test").style.visibility = "visible";
-                   this.$router.push({name:'home'});
+                   this.$router.push({name:'homeview'});
                   },
                 selAllMarkers(){ //based on filtered data!!!
                   //console.log(111, this.filteredLocations.length);

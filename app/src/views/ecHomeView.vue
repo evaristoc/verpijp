@@ -4,9 +4,9 @@
             <!--<router-view name='sidebar'></router-view>
             <router-view name='map'></router-view>-->
             
-                  <ec-main-sidebar></ec-main-sidebar>
+                  <ec-main-sidebar-view></ec-main-sidebar-view>
                   <div>
-                       <ec-map-component></ec-map-component>
+                       <ec-map-comp></ec-map-comp>
                   </div>                  
             
             
@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import ecMainSidebar from './ecMainSidebar';
-import ecMapComponent from '../components/ecMapComponent';      
+import ecMainSidebarView from './ecMainSidebarView';
+import ecMapComp from '../components/ecMapComp';      
 
 export default {
   name: 'home-view', //RELEVANT! Because registered as TOP in router, it will be rendered on APP `router-viewer`!! (this name not relevant for now...)
   components:{
-      "ec-main-sidebar": ecMainSidebar,   //this is a view
-      "ec-map-component": ecMapComponent  //this is still a component
+      "ec-main-sidebar-view": ecMainSidebarView,   //this is a view
+      "ec-map-comp": ecMapComp  //this is still a component
       },
   data () {
     return {

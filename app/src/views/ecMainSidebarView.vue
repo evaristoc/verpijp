@@ -21,7 +21,7 @@
 </template> <!-- COMPONENT template END -->
 <script>
   import Vue from 'vue';
-  import ecMainSidebarnavrouterlink from './ecNavMainSidebar'; //this is the MENU or NAV!
+  import ecMainSidebarnavrouterlink from './ecMainSidebarNavRouterLink'; //this is the MENU or NAV!
 
   
    

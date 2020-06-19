@@ -1,10 +1,12 @@
 <template>
     <transition appear>
+		{{myhunt}}
         <div class="container">
             <div class="row mt-1">
                 <div class="col-12">
-                    <img src="https://i.ibb.co/zbF6Kt9/8232820489-579018c1cd-b.jpg" class="float-left" width="100%">
-                </div>
+                    <!--<img src="https://i.ibb.co/zbF6Kt9/8232820489-579018c1cd-b.jpg" class="float-left" width="100%">-->
+					<img :src="myhunt.gamedata.fotogame" class="float-left" width="100%">
+				</div>
             </div>
             <!--<div class="row mt-1">
                 <div class="col-12">
@@ -14,8 +16,8 @@
             <div class="row mt-1">
                 <div class="col-12" role="group">
                     <form>
-                         <label for="input-live"><h4>What is the name of the business with this window?</h4></label>
-                         <input v-model="$v.text.$model" :class="status($v.text)">
+                         <label for="input-live"><h4>{{myhunt.gamedata.question}}</h4></label>
+                         <input v-model="$v.text.$model" :class="status($v.text)" :placeholder="myhunt.gamedata.placeholder">
                          <button class="btn btn-success" @click.prevent="gotoSol()">Solution</button><!--https://stackoverflow.com/questions/45185891/vue-js-navigate-to-url-with-question-mark-->
                     </form>
                      <pre>{{ $v }}</pre>
@@ -48,12 +50,13 @@
         //    return this.text
         //}
     },
+  props:['myhunt'],
   validations: {
   	text: {
     	required,
         sameAs: function(){ //if EXACT, the solution here was to write `sameAs(function(){return VALUE})`
             //console.log(this);
-            return this.$v.text.$model.toLowerCase() === 'glou';
+            return this.$v.text.$model.toLowerCase() === this.myhunt.gamedata.answer;
             },
     }
   },

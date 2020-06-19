@@ -1,7 +1,9 @@
 <template>
     <div>
-        <h3>Tweede van der Helststraat (between 3-13)</h3>
-        <router-view></router-view>
+        <h3>{{myhunt.eststreet}}</h3>
+        <!--<pre>{{hunt}}</pre>
+        {{$route.params}}-->
+        <router-view :myhunt="myhunt"></router-view>
     </div>
             <!--<div class="row mt-1">
                 <div class="col-3">
@@ -76,3 +78,29 @@
         </div>
     </div>-->
 </template>
+<script>
+    
+    import {verdata} from '../assets/verpijptest.js';
+    
+    export default {
+      
+      data(){
+          return {
+                    
+                };
+        },
+      computed:{
+        newitem(){return parseInt(this.$route.params.id)},
+        myhunt(){
+            //console.log(this.$route.params);
+            for (let i = 0; i < verdata.output.length; i++) {
+                if (verdata.output[i].imgid == this.newitem) {
+                    //code
+                    console.log(verdata.output[i]);
+                    return verdata.output[i];
+                }
+            };
+        }
+      }
+    }
+</script>

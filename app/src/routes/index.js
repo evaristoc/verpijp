@@ -31,7 +31,7 @@ References to keep around...
 
 //=========================================
 
-import home from '../views/Home.vue'; //a component (I wont say it is a view...) that nests map, as well as main sidebar which nest sidebar (both actually the VIEWs in my opinion); all are PUBLIC (main.js)
+import HomeView from '../views/ecHomeView.vue'; //a component (I wont say it is a view...) that nests map, as well as main sidebar which nest sidebar (both actually the VIEWs in my opinion); all are PUBLIC (main.js)
 
 //this two below are children of home
 
@@ -45,31 +45,31 @@ import CamInterf from '../components/ecCameraInterface.vue' //an apart component
 
 //=========================================
 
-import lphunts from '../views/LPHuntsView.vue'; //viewer
+import lpHuntsView from '../views/ecLPHuntsView.vue'; //viewer
 
-import LandPageHunt from '../components/ecLPHuntsMain.vue' //a list of links, so a navigator?
+import ListHuntsRL from '../views/ecListHuntsRouterLinks.vue' //a list of links, so a navigator?
 
-import Hunt from '../views/ecHuntView.vue' //viewer
+import HuntView from '../views/ecHuntView.vue' //viewer
 
-import HuntQ from '../components/HuntQues.vue'
+import HuntQ from '../components/ecHuntQues.vue'
 
-import HuntS from '../components/HuntSol.vue'
+import HuntS from '../components/ecHuntSol.vue'
 
 export const routes = [
   {
     path: '',
-    name: 'home',
-    component: home,
+    name: 'homeview',
+    component: HomeView,
     children:[
       {
         path: 'gallery',
-        name: 'maingallery',
+        name: 'maingallerycomp',
         component: Gallery
       },      
 
       {
         path: 'about',
-        name: 'mainabout',
+        name: 'mainaboutcomp',
         component: GenAbout
       },
     ]
@@ -77,41 +77,40 @@ export const routes = [
   
   {
     path:'/testcamera',
-    name: 'camera',
+    name: 'cameracomp',
     component: CamInterf,
   },
   
   {
     path: '/hunts',
-    name: 'hunts',
-    component: lphunts,
+    name: 'huntsview',
+    component: lpHuntsView,
     children:[
       {
         path:'',
-        name: 'huntlist',
-        component: LandPageHunt,
-      },
-      {
-        path:'hunt',
-        name: 'huntunit',
-        component: Hunt,
-        children:[
-          {
-            path:'question',
-            name: 'huntquestion',
-            component: HuntQ
-          },
-          {
-            path:'answer',
-            name: 'huntanswer',
-            component: HuntS,
-            beforeEnter: (to, from, next)=>{ if(from.name == 'huntquestion'){ next() } else { next('hunts/hunt/question') } }
-          },          
-        ]
+        name: 'huntlistrl',
+        component: ListHuntsRL,
       },
     ]
   },
-
+  {
+    path:'/hunt',
+    name: 'huntunitview',
+    component: HuntView,
+    children:[
+      {
+        path:':spreadid/:id/question',
+        name: 'huntquestioncomp',
+        component: HuntQ
+      },
+      {
+        path:':spreadid/:id/answer',
+        name: 'huntanswercomp',
+        component: HuntS,
+        beforeEnter: (to, from, next)=>{ if(from.name == 'huntquestioncomp'){ next() } else { next(false) } }
+      },          
+    ]
+  },
   {
     path:'*',
     name:'404',
