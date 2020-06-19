@@ -42,7 +42,7 @@
           </div><!-- COMPONENT nav-ctrls END -->
           <!-- COMPONENT gallery START -->
           <div id="sel-gallery" class="content-fluid">
-               <div class="grid" v-if="filteredLocationsLost.length > 0">
+               <!--<div class="grid" v-if="filteredLocationsLost.length > 0">
                     <h3>Get Lost!</h3>
                      <div class="cell" v-for="loc in filteredLocationsLost">
                         <div class="item-title">
@@ -51,14 +51,14 @@
                             <button @click="cltMarker($event)" type="button" :id="idConcat(loc.itemid)" :value="loc.itemid" class="btn btn-street" :class="loc.sel? 'btn-outline-secondary':'btn-outline-info'">{{loc.street}}, {{loc.year}}</button>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <div class="grid">
                    <h3>Sarphatipark Route {{getlostC}}</h3>
                     <div class="cell" v-for="loc in filteredLocations">
                         <div class="item-title">
                             <img style="width:100px;height:100px;margin-left:20px;" @click="openModal(loc)" :id="idConcat(loc.itemid+'_img')" :src=loc.picture class="responsive-image">
                             </br>
-                            <button @click="cltMarker($event)" type="button" :id="idConcat(loc.itemid)" :value="loc.itemid" class="btn btn-street" :class="loc.sel? 'btn-outline-secondary':'btn-outline-info'">{{loc.street}}, {{loc.year}}  <span><img src="http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png"></span></button>
+                            <button @click="cltMarker($event)" type="button" :id="idConcat(loc.itemid)" :value="loc.itemid" class="btn btn-street" :class="loc.sel? 'btn-outline-secondary':'btn-outline-info'">{{loc.street}}, {{loc.year}}  <span><img :src="iconType(loc.useas)"></span></button>
                         </div>
                     </div>
                 </div>
@@ -103,33 +103,33 @@
                return parseInt(window.EventBus.getlost)
             },
             
-            filteredLocationsLost(){ //filtered items/markers
-                console.log(444);
-                let l;
-                if (!this.locations.length) {
-                    return [];
-                }
-                l = this.locations.filter(loc => {
-                        window.EventBus.$on('yeslost', function(d){
-                              this.getlost = d.where;
-                              console.log(2222, this.getlost)
-                         })
-                        console.log(1111, window.EventBus.getlost, loc.getlost, this.getlost);
-                        //this.getlost = parseInt(window.EventBus.getlost);
-                        if (loc.getlost != 1 && loc.getlost == parseInt(window.EventBus.getlost)) {
-                                  return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
-                        }
-                        //if (nosearch && (5 == loc.getlost)) {
-                        //    return true
-                        //}
-                        //
-                        //return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
-                    })
-        
-               
-                return l;
-                
-            },
+            //filteredLocationsLost(){ //filtered items/markers
+            //    console.log(444);
+            //    let l;
+            //    if (!this.locations.length) {
+            //        return [];
+            //    }
+            //    l = this.locations.filter(loc => {
+            //            window.EventBus.$on('yeslost', function(d){
+            //                  this.getlost = d.where;
+            //                  console.log(2222, this.getlost)
+            //             })
+            //            //console.log(1111, window.EventBus.getlost, loc.getlost, this.getlost);
+            //            //this.getlost = parseInt(window.EventBus.getlost);
+            //            if (loc.getlost != 1 && loc.getlost == parseInt(window.EventBus.getlost)) {
+            //                      return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+            //            }
+            //            //if (nosearch && (5 == loc.getlost)) {
+            //            //    return true
+            //            //}
+            //            //
+            //            //return [loc.street +' '+ loc.year][0].toLowerCase().includes(this.search.toLowerCase())
+            //        })
+            //
+            //   
+            //    return l;
+            //    
+            //},
             
             filteredLocations(){ //filtered items/markers
                 let l;
@@ -167,24 +167,48 @@
         },
         
         methods:{
-            cltMarker(e){ //an emiter only; currently duplicated between NavMain.. and PhotoGal.. to facilitate redoing
-                let idx = e.target.value;
-                if (document.getElementById("btnaddmark_"+idx)) {
-                    if (document.getElementById("btnaddmark_"+idx).classList.contains("btn-outline-info")) {
-                        this.locations[idx].sel = true;
-                       
-                    }else if(document.getElementById("btnaddmark_"+idx).classList.contains("btn-outline-secondary")) {
-                        this.locations[idx].sel = false;
-                        
+               cltMarker(e){ //an emiter only; currently duplicated between NavMain.. and PhotoGal.. to facilitate redoing
+                   let idx = e.target.value;
+                   if (document.getElementById("btnaddmark_"+idx)) {
+                       if (document.getElementById("btnaddmark_"+idx).classList.contains("btn-outline-info")) {
+                           this.locations[idx].sel = true;
+                          
+                       }else if(document.getElementById("btnaddmark_"+idx).classList.contains("btn-outline-secondary")) {
+                           this.locations[idx].sel = false;
+                           
+                       }
+           
+                       window.EventBus.$emit('clt-marker', this.locations[idx]);
+             
+                   }
+                 },
+              
+               idConcat(idx){
+                   return "btnaddmark_"+idx
+                 },
+              
+               iconType(t) {
+                    if (t == "show") {
+                        //code
+                        return "http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png"
+                        //return "http://icons.iconarchive.com/icons/iconcubic/classic-cameras/32/Leica-2-icon.png"
+                    }else if (t == "hist") {
+                        //code
+                        //return "http://icons.iconarchive.com/icons/icons8/ios7/32/Cinema-History-icon.png"
+                        return "https://img.icons8.com/plasticine/32/000000/order-history.png"
+                    }else if (t == "game") {
+                        //code
+                        //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+                        //return "https://image.flaticon.com/icons/png/32/179/179658.png"
+                        return "http://icons.iconarchive.com/icons/graphicloads/seo-services/32/location-icon.png" 
+                    }else if (t == "expand") {
+                        //code
+                        //return "http://icons.iconarchive.com/icons/aha-soft/free-3d-glossy-interface/32/move-icon.png"
+                        //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+                        return "http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/32/compass-icon.png"
                     }
-        
-                    window.EventBus.$emit('clt-marker', this.locations[idx]);
-          
-                }
-              },
-            idConcat(idx){
-                return "btnaddmark_"+idx
-              },
+                },
+                      
               
                 closeNav() {
                    document.getElementById("mySidenav").style.width = "0px";

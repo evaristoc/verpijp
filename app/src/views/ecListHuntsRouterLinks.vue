@@ -5,7 +5,7 @@
             <div class="row mt-1">
                 <div class="col-12">
                     <!--<a href="">{{hunt.eststreet}} : {{hunt.gamedata.question}}</a>-->
-                    <router-link :to="'hunt/'+newitem+'/'+hunt.imgid+'/question'" tag="li" active-class="active"><b>{{hunt.eststreet}}</b> : {{hunt.gamedata.question}}</router-link>
+                    <router-link :to="'hunt/'+newitem+'/'+hunt.imgid+'/question'" tag="li" active-class="active"><span><img :src="iconType(hunt.useas)"></span> <b>{{hunt.eststreet}}</b> : {{hunt.gamedata.question}}</router-link>
                     <!--<pre>{{hunt}}</pre>-->
                 </div>
             </div>
@@ -75,7 +75,37 @@
                     return h;
                 }
             }
-        }
+        },
+        
+        methods:{
+               iconType(t) {
+                    if (t == "show") {
+                        //code
+                        return "http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png"
+                        //return "http://icons.iconarchive.com/icons/iconcubic/classic-cameras/32/Leica-2-icon.png"
+                    }else if (t == "hist") {
+                        //code
+                        //return "http://icons.iconarchive.com/icons/icons8/ios7/32/Cinema-History-icon.png"
+                        return "https://img.icons8.com/plasticine/32/000000/order-history.png"
+                    }else if (t == "game") {
+                        //code
+                        //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+                        //return "https://image.flaticon.com/icons/png/32/179/179658.png"
+                        return "http://icons.iconarchive.com/icons/graphicloads/seo-services/32/location-icon.png" 
+                    }else if (t == "expand") {
+                        //code
+                        //return "http://icons.iconarchive.com/icons/aha-soft/free-3d-glossy-interface/32/move-icon.png"
+                        //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+                        return "http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/32/compass-icon.png"
+                    }
+                },        
+        },
     }
     
 </script>
+<style>
+    li{
+        padding: .3em 0 1em 40px;
+        list-style-type: none;
+    } 
+</style>

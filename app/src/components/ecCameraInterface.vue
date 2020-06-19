@@ -28,11 +28,13 @@
            <!-- SIDEBAR MENU -->
            <div id="vid-mySidenav" class="vid-sidenav">
              <a href="javascript:void(0)" class="vid-closemenu" @click="closeNav()">&times;</a>
-             <a href="#" @click="openModal('story')">Photo Story</a>
-             <a href="#">Tutorial</a>
+             <img :src="iconType(newuseas)">
+             <a href="#" @click="openModal('story')" v-if="newuseas == 'hist'">Some History...</a>
+             <a href="#" @click="openModal('story')" v-if="newuseas == 'expand' || newuseas == 'show'">Description</a>
              <!--<a href="#">Back to Main</a>-->
-             <a :href="'./#/hunts?q='+newitem+'&gl='+newimgid" @click="gettingLost()">Wanna hunt?</a>
+             <a :href="'./#/hunts?q='+newitem+'&gl='+newimgid" @click="gettingLost()" v-if="newuseas == 'expand'">Wanna explore?</a>
              <a href="./#/gallery">Go To Map</a>
+             <a href="#">Help</a>
              <!--<router-link to="/gallery">Map</router-link>--> <!-- because not defined as the rest, requires a specific styling - silly... -->
            </div>
            
@@ -106,6 +108,7 @@ export default {
       newpicture(){return this.vd[this.newitem]?this.vd[this.newitem].picture:'';},
       newstreet(){return this.vd[this.newitem]?this.vd[this.newitem].street:'';},
       newimgid(){return this.vd[this.newitem]?this.vd[this.newitem].imgid:'';},
+      newuseas(){return this.vd[this.newitem]?this.vd[this.newitem].useas:'';}
 
    },
    
@@ -321,6 +324,28 @@ export default {
                console.log(333, window.EventBus.getlost);
                //this.$router.push('/hunt');
             },
+            
+         iconType(t) {
+              if (t == "show") {
+                  //code
+                  return "http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png"
+                  //return "http://icons.iconarchive.com/icons/iconcubic/classic-cameras/32/Leica-2-icon.png"
+              }else if (t == "hist") {
+                  //code
+                  //return "http://icons.iconarchive.com/icons/icons8/ios7/32/Cinema-History-icon.png"
+                  return "https://img.icons8.com/plasticine/32/000000/order-history.png"
+              }else if (t == "game") {
+                  //code
+                  //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+                  //return "https://image.flaticon.com/icons/png/32/179/179658.png"
+                  return "http://icons.iconarchive.com/icons/graphicloads/seo-services/32/location-icon.png" 
+              }else if (t == "expand") {
+                  //code
+                  //return "http://icons.iconarchive.com/icons/aha-soft/free-3d-glossy-interface/32/move-icon.png"
+                  //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
+                  return "http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/32/compass-icon.png"
+              }
+          }, 
 
         openModal(event){
               //console.log(event);

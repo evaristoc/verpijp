@@ -79,7 +79,10 @@
     </div>-->
 </template>
 <script>
-    
+    //https://stackoverflow.com/questions/41544174/send-data-to-components-in-vuejs-vue-router/45496186#45496186
+    //https://laracasts.com/index.php/discuss/channels/vue/pass-data-to-components-while-using-vue-router?page=0
+    //https://forum.vuejs.org/t/pass-data-from-parent-view-to-child-router-view/27926/5
+    //https://dev.to/aligoren/passing-data-to-a-router-link-in-vuejs-2cb0
     import {verdata} from '../assets/verpijptest.js';
     
     export default {
