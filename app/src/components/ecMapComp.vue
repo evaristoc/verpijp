@@ -21,6 +21,8 @@
             </div>
         </div>
         <!--<h1>VerPijp Project</h1>-->
+        <div class="btn btn-dark" style="position:absolute; z-index:100; left:10px; top:40px;">OudPijp</div>
+        <a href="./#/about" class="btn btn-primary" style="position:absolute; z-index:100; left:100px; top:40px;">About</a>
         <div id="map" class="h-250"></div>
     </div>
 </template>
@@ -28,8 +30,23 @@
     import Vue from 'vue';
     import {loadedGoogleMapsAPI} from '../main'
     import {style_map} from '../assets/stylingdata'
+    import {verdata} from '../assets/verpijptest.js'
  
   export default {
+    
+    data(){
+        return{
+        }
+    
+    },
+    
+    computed:{
+        _locationsCOMP(){
+            return verdata.output;    
+        },
+    
+    },
+    
     props: {
       'centerlat': {
         type: Number,
@@ -54,18 +71,10 @@
     },
 
     created(){
-      window.EventBus.$on('clear-all-markers', ()=>{
-        this.clearAllMarkers();
-        //this.$markers = {};
-      });
-      window.EventBus.$on('clt-marker', (d)=>{ //a receiver, where the functionality really resides
-        if (d.sel === false) {
-            this.clearMarker(d);
-        }else if (d.sel === true) {
-            let marker = this.makeMarker(d);
-            this.$markers[d.itemid] = marker;
-        }
-      });
+
+    },
+
+    mounted() {
       window.EventBus.$on('tracking', (d)=>{
         if (d.tr === true) {
             this.startTrackPosition()
@@ -73,25 +82,22 @@
             this.stopTrackPosition()
         }
       })
-    },
-
-    mounted() {
-      this.$markers = {};
-      this.$mymarker = {};
+      
+      //console.log(this._locationsMOUNT)
+      this._ecmapmymarkerMOUNT = {};
       let mymarker = {lat:0,lng:0,street:''};
       //this.initMap();
       loadedGoogleMapsAPI
                     .then(()=>{
+                        this._ecmaplocationsMOUNT = verdata.output;
                         this.initMap();
-                        this.$mymarker = this.makeMarker(mymarker, true);
+                        this._ecmapmymarkerMOUNT = this.makeMarker(mymarker, true);
+                        for(let i = 0; i < this._ecmaplocationsMOUNT.length; i++){
+                            let z = this.makeMarker(this._ecmaplocationsMOUNT[i]);
+                        };
                         //console.log('mm', this.$mymarker);
                     })
                     .catch((err)=>{console.log("RESULT loading GM API", err)});
-      Vue.nextTick()
-                    .then(()=>{
-                        this.clearMarker();
-                        //console.error('HERE SHOULD BE clearMarkers')
-                    });
     },
     data(){
         return {
@@ -104,32 +110,16 @@
         this.$map = new window.google.maps.Map(document.getElementById('map'), {
         center: new window.google.maps.LatLng(this.centerlat, this.centerlng),
         zoom: this.zoom,
-        styles: style_map.data
+        styles: style_map.data,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.BOTTOM_CENTER
+        },
       });
     
       },
       makeInfoWindow(d){
-        //var contentString = '<div id="content">'+
-        //    '<div id="siteNotice">'+
-        //    '</div>'+
-        //    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-        //    '<div id="bodyContent">'+
-        //    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-        //    'sandstone rock formation in the southern part of the '+
-        //    'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-        //    'south west of the nearest large town, Alice Springs; 450&#160;km '+
-        //    '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-        //    'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-        //    'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-        //    'Aboriginal people of the area. It has many springs, waterholes, '+
-        //    'rock caves and ancient paintings. Uluru is listed as a World '+
-        //    'Heritage Site.</p>'+
-        //    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-        //    'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-        //    '(last visited June 22, 2009).</p>'+
-        //    '</div>'+
-        //    '</div>';
-        //console.log(d);
+
         window.openModal_map = function(picture){
               let modal = document.getElementById('myModal_map');
               //let img = document.getElementById(this.idConcat(loc.itemid+'_img'));
@@ -220,23 +210,6 @@
       //{path: google.maps.SymbolPath.CIRCLE, scale: 10}
         return m
       },
-    clearMarker(d){
-        //console.log(this.$markers)
-        this.$markers[d.itemid].setMap(null);
-        //document.getElementById("btnaddmark_"+idx).disabled = false;
-        //console.log(this.$markers)
-      },
-      clearAllMarkers(){
-        let ids = Object.keys(this.$markers);
-        //console.log(this.$markers);
-        for( let idx = 0; idx < ids.length; idx++ ){
-            this.$markers[ids[idx]].setMap(null);
-            //document.getElementById("btnaddmark_"+ids[idx]).disabled = false;
-            //sel = "unselected";
-            document.getElementById("btnaddmark_"+ids[idx]).classList.remove("btn-outline-secondary");
-            document.getElementById("btnaddmark_"+ids[idx]).classList.add("btn-outline-info");
-        };
-      },
       startTrackPosition() {
         if (navigator.geolocation) {
           this.posWatchID = navigator.geolocation.watchPosition(
@@ -256,10 +229,10 @@
                 return
             }
             navigator.geolocation.clearWatch(this.posWatchID)
-            this.$mymarker.setPosition({lat:0,lng:0})            
+            this._ecmapmymarkerMOUNT.setPosition({lat:0,lng:0})            
         },
       successPosition: function(position){
-            this.$mymarker.setPosition({lat:position.coords.latitude,lng:position.coords.longitude})
+            this._ecmapmymarkerMOUNT.setPosition({lat:position.coords.latitude,lng:position.coords.longitude})
       },
       failurePosition: function(err){
         alert("Error Code: " + err.code + " Error Message: " + err.message);

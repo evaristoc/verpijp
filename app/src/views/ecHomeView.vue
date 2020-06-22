@@ -3,8 +3,7 @@
       <div id="appcontent">    
             <!--<router-view name='sidebar'></router-view>
             <router-view name='map'></router-view>-->
-            
-                  <ec-main-sidebar-view></ec-main-sidebar-view>
+
                   <div>
                        <ec-map-comp></ec-map-comp>
                   </div>                  
@@ -17,13 +16,11 @@
 </template>
 
 <script>
-import ecMainSidebarView from './ecMainSidebarView';
 import ecMapComp from '../components/ecMapComp';      
 
 export default {
   name: 'home-view', //RELEVANT! Because registered as TOP in router, it will be rendered on APP `router-viewer`!! (this name not relevant for now...)
   components:{
-      "ec-main-sidebar-view": ecMainSidebarView,   //this is a view
       "ec-map-comp": ecMapComp  //this is still a component
       },
   data () {
@@ -52,8 +49,8 @@ export default {
       -moz-osx-font-smoothing: grayscale;
       /*text-align: center;*/
       /*color: #2c3e50;
-      color: #8b9299;*/
-      color: #393D3F;
+      color: #8b9299;
+      color: #393D3F;*/
       padding-top: 20px;
       background-color: #BFACAC;
       height: 100%;

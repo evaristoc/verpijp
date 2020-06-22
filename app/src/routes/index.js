@@ -35,8 +35,6 @@ import HomeView from '../views/ecHomeView.vue'; //a component (I wont say it is 
 
 //this two below are children of home
 
-import Gallery from '../components/ecPhotoGallery.vue' //a component that contains the whole utilities of the sidebar
-
 import GenAbout from '../components/ecGeneralAbout.vue' //the About page
 
 //=========================================
@@ -60,20 +58,13 @@ export const routes = [
     path: '',
     name: 'homeview',
     component: HomeView,
-    children:[
-      {
-        path: 'gallery',
-        name: 'maingallerycomp',
-        component: Gallery
-      },      
-
-      {
-        path: 'about',
-        name: 'mainaboutcomp',
-        component: GenAbout
-      },
-    ]
   },
+  
+  {
+    path: '/about',
+    name: 'mainaboutcomp',
+    component: GenAbout
+  },  
   
   {
     path:'/testcamera',

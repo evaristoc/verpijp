@@ -33,7 +33,7 @@
              <a href="#" @click="openModal('story')" v-if="newuseas == 'expand' || newuseas == 'show'">Description</a>
              <!--<a href="#">Back to Main</a>-->
              <a :href="'./#/hunts?q='+newitem+'&gl='+newimgid" @click="gettingLost()" v-if="newuseas == 'expand'">Wanna explore?</a>
-             <a href="./#/gallery">Go To Map</a>
+             <a href="./#/">Go To Map</a>
              <a href="#">Help</a>
              <!--<router-link to="/gallery">Map</router-link>--> <!-- because not defined as the rest, requires a specific styling - silly... -->
            </div>
