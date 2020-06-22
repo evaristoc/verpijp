@@ -1,5 +1,14 @@
 <template>
     <div>
+        <!-- A grey horizontal navbar that becomes vertical on small screens -->
+        <nav class="navbar navbar-expand-sm bg-dark">
+          <!-- Links -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/#/">X</a>
+            </li>
+          </ul>      
+        </nav>
         <h3>Hunt View</h3>
         <h3>{{myhunt.eststreet}}</h3>
         <pre>{{hunt}}</pre>
