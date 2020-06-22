@@ -1,8 +1,9 @@
 <template>
     <div>
+        <h3>Hunt View</h3>
         <h3>{{myhunt.eststreet}}</h3>
-        <!--<pre>{{hunt}}</pre>
-        {{$route.params}}-->
+        <pre>{{hunt}}</pre>
+        {{$route.params}}<!---->
         <router-view :myhunt="myhunt"></router-view>
     </div>
             <!--<div class="row mt-1">
@@ -93,13 +94,14 @@
                 };
         },
       computed:{
-        newitem(){return parseInt(this.$route.params.id)},
+        nodeimg(){return parseInt(this.$route.params.nodeimg)},
         myhunt(){
-            //console.log(this.$route.params);
+            //console.log(1111, this.$route.params);
             for (let i = 0; i < verdata.output.length; i++) {
-                if (verdata.output[i].imgid == this.newitem) {
+                //console.log(1111, this.$route.params);
+                if (parseInt(verdata.output[i].imgid) == parseInt(this.nodeimg)) {
                     //code
-                    console.log(verdata.output[i]);
+                    //console.log(2222, verdata.output[i]);
                     return verdata.output[i];
                 }
             };

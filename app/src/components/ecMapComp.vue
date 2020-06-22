@@ -141,7 +141,7 @@
                 <div id="siteNotice"></div>
                 <table>
                     <tr><td><button onclick="openModal_map('${d.picture}')"><strong>foto</strong></button></td></tr>
-                    <tr><td><a href="/#/testcamera?q=${d.itemid}&gl=${d.imgid}"><strong>foto overlap (experimental)</strong></a></td></tr>
+                    <tr><td><a href="/#/hunt/${d.imgid}/${d.itemid}/description"><strong>foto overlap (experimental)</strong></a></td></tr>
                     <tr><td><strong>year</strong></td><td>${d.year}</td></tr>
                     <tr><td><strong>est.address</strong></td><td>${d.street}</td></tr>
                     <tr><td><strong>bron</strong></td><td><a href="https://www.facebook.com/PrentenVanWeleerAmsterdamDePijp/">Postcards from de Pijp</a></td></tr>

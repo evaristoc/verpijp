@@ -5,7 +5,7 @@
             <div class="row mt-1">
                 <div class="col-12">
                     <!--<a href="">{{hunt.eststreet}} : {{hunt.gamedata.question}}</a>-->
-                    <router-link :to="'hunt/'+newitem+'/'+hunt.imgid+'/question'" tag="li" active-class="active"><span><img :src="iconType(hunt.useas)"></span> <b>{{hunt.eststreet}}</b> : {{hunt.gamedata.question}}</router-link>
+                    <router-link :to="'hunt/'+nodeimg+'/'+hunt.imgid+'/question'" tag="li" active-class="active"><span><img :src="iconType(hunt.useas)"></span> <b>{{hunt.eststreet}}</b> : {{hunt.gamedata.question}}</router-link>
                     <!--<pre>{{hunt}}</pre>-->
                 </div>
             </div>
@@ -58,7 +58,7 @@
         },
         
         computed:{
-            newitem(){return this.$route.query.gl},
+            nodeimg(){return this.$route.query.nodeimg},
             hunts(){
                 if (verdata.output) {
                     //code
@@ -66,7 +66,7 @@
                     //console.log(this.newitem)
                     for (let i = 0; i < verdata.output.length; i++) {
                         //console.log(verdata.output[i].getlost);
-                        if (verdata.output[i].getlost == parseInt(this.newitem)) {
+                        if (parseInt(verdata.output[i].getlost) == parseInt(this.nodeimg)) {
                             //code
                             h.push(verdata.output[i])
                         }

@@ -90,12 +90,17 @@ export const routes = [
     component: HuntView,
     children:[
       {
-        path:':spreadid/:id/question',
+        path:':nodeimg/:imgid/description',
+        name: 'huntdescriptcomp',
+        component: HuntS
+      },
+      {
+        path:':nodeimg/:imgid/question',
         name: 'huntquestioncomp',
         component: HuntQ
       },
       {
-        path:':spreadid/:id/answer',
+        path:':nodeimg/:imgid/answer',
         name: 'huntanswercomp',
         component: HuntS,
         beforeEnter: (to, from, next)=>{ if(from.name == 'huntquestioncomp'){ next() } else { next(false) } }
