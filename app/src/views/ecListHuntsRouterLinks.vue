@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h3>HELLO HUNTS</h3>
-        <div class="container" v-if="hunts.length > 0" v-for="hunt in hunts">
+        <h3>HELLO COLLECTABLES</h3>
+        <div class="container" v-if="collects.length > 0" v-for="collect in collects">
             <div class="row mt-1">
                 <div class="col-12">
                     <!--<a href="">{{hunt.eststreet}} : {{hunt.gamedata.question}}</a>-->
-                    <router-link :to="'hunt/'+nodeimg+'/'+hunt.imgid+'/question'" tag="li" active-class="active"><span><img :src="iconType(hunt.useas)"></span> <b>{{hunt.eststreet}}</b> : {{hunt.gamedata.question}}</router-link>
+                    <router-link :to="'spot/'+nodeimg+'/'+collect.imgid+'/question'" tag="li" active-class="active"><span><img :src="collect.iconType(collect.useas)"></span> <b>{{collect.eststreet}}</b> : {{collect.gamedata.question}}</router-link>
                     <!--<pre>{{hunt}}</pre>-->
                 </div>
             </div>
@@ -59,7 +59,7 @@
         
         computed:{
             nodeimg(){return this.$route.query.nodeimg},
-            hunts(){
+            collects(){
                 if (verdata.output) {
                     //code
                     let h = [];

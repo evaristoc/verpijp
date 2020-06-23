@@ -43,15 +43,15 @@ import CamInterf from '../components/ecCameraInterface.vue' //an apart component
 
 //=========================================
 
-import lpHuntsView from '../views/ecLPHuntsView.vue'; //viewer
+import lpCollectsView from '../views/ecLPHuntsView.vue'; //viewer
 
-import ListHuntsRL from '../views/ecListHuntsRouterLinks.vue' //a list of links, so a navigator?
+import ListCollectsRL from '../views/ecListHuntsRouterLinks.vue' //a list of links, so a navigator?
 
-import HuntView from '../views/ecHuntView.vue' //viewer
+import SpotView from '../views/ecHuntView.vue' //viewer
 
-import HuntQ from '../components/ecHuntQues.vue'
+import SpotQ from '../components/ecHuntQues.vue'
 
-import HuntS from '../components/ecHuntSol.vue'
+import SpotS from '../components/ecHuntSol.vue'
 
 export const routes = [
   {
@@ -67,43 +67,43 @@ export const routes = [
   },  
   
   {
-    path:'/testcamera',
-    name: 'cameracomp',
+    path:'/imageoverlay',
+    name: 'imageoverlay',
     component: CamInterf,
   },
   
   {
-    path: '/hunts',
-    name: 'huntsview',
-    component: lpHuntsView,
+    path: '/collects',
+    name: 'collectsview',
+    component: lpCollectsView,
     children:[
       {
         path:'',
-        name: 'huntlistrl',
-        component: ListHuntsRL,
+        name: 'collectslistrl',
+        component: ListCollectsRL,
       },
     ]
   },
   {
-    path:'/hunt',
-    name: 'huntunitview',
-    component: HuntView,
+    path:'/spot',
+    name: 'spotunitview',
+    component: SpotView,
     children:[
       {
         path:':nodeimg/:imgid/description',
-        name: 'huntdescriptcomp',
-        component: HuntS
+        name: 'spotdescriptcomp',
+        component: SpotS
       },
       {
         path:':nodeimg/:imgid/question',
-        name: 'huntquestioncomp',
-        component: HuntQ
+        name: 'collectquestioncomp',
+        component: SpotQ
       },
       {
         path:':nodeimg/:imgid/answer',
-        name: 'huntanswercomp',
-        component: HuntS,
-        beforeEnter: (to, from, next)=>{ if(from.name == 'huntquestioncomp'){ next() } else { next(false) } }
+        name: 'collectanswercomp',
+        component: SpotS,
+        beforeEnter: (to, from, next)=>{ if(from.name == 'collectquestioncomp'){ next() } else { next(false) } }
       },          
     ]
   },

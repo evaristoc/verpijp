@@ -2,18 +2,18 @@
     <div>
         <!-- A grey horizontal navbar that becomes vertical on small screens -->
         <nav class="navbar navbar-expand-sm bg-dark">
+          <h3 style="color:#fff;">Item View</h3>
           <!-- Links -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/#/">X</a>
+              <a class="nav-link" href="/#/">&times;</a>
             </li>
           </ul>      
         </nav>
-        <h3>Hunt View</h3>
-        <h3>{{myhunt.eststreet}}</h3>
-        <pre>{{hunt}}</pre>
-        {{$route.params}}<!---->
-        <router-view :myhunt="myhunt"></router-view>
+        <h3>{{myitemdata.eststreet}}</h3>
+        <!--<pre>{{item}}</pre>
+        {{$route.params}}-->
+        <router-view :myitemdata="myitemdata"></router-view>
     </div>
             <!--<div class="row mt-1">
                 <div class="col-3">
@@ -103,12 +103,12 @@
                 };
         },
       computed:{
-        nodeimg(){return parseInt(this.$route.params.nodeimg)},
-        myhunt(){
+        imgid(){return parseInt(this.$route.params.imgid)},
+        myitemdata(){
             //console.log(1111, this.$route.params);
             for (let i = 0; i < verdata.output.length; i++) {
                 //console.log(1111, this.$route.params);
-                if (parseInt(verdata.output[i].imgid) == parseInt(this.nodeimg)) {
+                if (parseInt(verdata.output[i].imgid) == parseInt(this.imgid)) {
                     //code
                     //console.log(2222, verdata.output[i]);
                     return verdata.output[i];

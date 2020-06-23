@@ -1,14 +1,11 @@
 <template>
         <transition appear>
-		{{myhunt}}
         
      	<div class="container" style="color: #001011;">
-        f17808 f0a500 f9d89c e8ead3 fbd46d ffcb74 ffc847
-        0FA9E6 001011 757780 FFFFFC 98CE00
             <div class="row mt-1">
                 <div class="col-12">
                     <!--<img src="https://i.ibb.co/zbF6Kt9/8232820489-579018c1cd-b.jpg" class="float-left" width="100%">-->
-					<img :src="myhunt.picture" class="float-left" width="100%">
+					<img :src="myitemdata.picture" class="float-left" width="100%">
 				</div>
             </div>
             <!--<div class="row mt-1">
@@ -36,14 +33,18 @@
             </div>
             <div class="row mt-1">
                 <div class="col-12" role="group">
-                   <h3>{{myhunt.street}}</h3>
+                   <h3>{{myitemdata.street}}</h3>
 				<ul>
-          <li><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/blue-camera-icon.png"></span> <a href="#">Some History...</a></li>
-				  <li><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/red-camera-icon.png"></span>  <a href="#">Image Overlay</a></li>
-				  <li><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/yellow-camera-icon.png"></span> <a href="#">Treasure Hunting</a></li>
+          <li v-if="myitemdata.useas == 'hist'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/blue-camera-icon.png"></span> <a href="#">Some De Pijp History...</a></li>
+				  <li v-if="myitemdata.useas == 'spot' || myitemdata.useas == 'errant' || myitemdata.useas == 'hist'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/red-camera-icon.png"></span>  <a :href="'./#/imageoverlay?itemid='+myitemdata.itemid">Try Image Overlay</a></li>
+				  <li v-if="myitemdata.useas == 'errant'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/yellow-camera-icon.png"></span> <a :href="'./#/collects?nodeimg='+myitemdata.imgid">Play an Errant Game</a></li>
 				</ul>
-					<p v-if="!myhunt.gamedata.descrip">Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi.</p>
-					<p>{{myhunt.gamedata.descrip}}</p>
+          <p>YEAR: <b>{{myitemdata.year}}</b></p>
+          <p>COPYRIGHT: <b>Public/Unkonwn</b></p>
+          <p>SOURCE: <b>{{myitemdata.source}}</b></p>  
+          </br>
+					<p v-if="!myitemdata.gamedata.descrip">Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi.</p>-->
+					<p>{{myitemdata.gamedata.descrip}}</p>
                 </div>
             </div>
         </div>
@@ -54,40 +55,15 @@
 </template>
 <script>
     export default {
-        props:['myhunt'],
+        props:['myitemdata'],
 		methods:{
-				iconType(t) {
-                    if (t == "show") {
-                        //code
-                        return "http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png"
-                        //return "http://icons.iconarchive.com/icons/iconcubic/classic-cameras/32/Leica-2-icon.png"
-                    }else if (t == "hist") {
-                        //code
-                        //return "http://icons.iconarchive.com/icons/icons8/ios7/32/Cinema-History-icon.png"
-                        return "https://img.icons8.com/plasticine/32/000000/order-history.png"
-                    }else if (t == "game") {
-                        //code
-                        //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
-                        //return "https://image.flaticon.com/icons/png/32/179/179658.png"
-                        return "http://icons.iconarchive.com/icons/graphicloads/seo-services/32/location-icon.png" 
-                    }else if (t == "expand") {
-                        //code
-                        //return "http://icons.iconarchive.com/icons/aha-soft/free-3d-glossy-interface/32/move-icon.png"
-                        //return "http://icons.iconarchive.com/icons/thegirltyler/brand-camp/32/Search-icon.png"
-                        return "http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/32/compass-icon.png"
-                    }
-                },  
-		},
+        },
     }
+
+        //f17808 f0a500 f9d89c e8ead3 fbd46d ffcb74 ffc847
+        //0FA9E6 001011 757780 FFFFFC 98CE00
 </script>
 <style>
-
- .v-enter-active, .v-leave-active {
-  transition: opacity .5s;
-}
-.v-enter, .v-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
 
 h3 {
     font-weight: 900;
@@ -128,4 +104,14 @@ p {
   padding: 0px;
   background-color: #dddddd;
 }*/
+
+
+ .v-enter-active, .v-leave-active {
+  transition: opacity .5s;
+}
+.v-enter, .v-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+
 </style>

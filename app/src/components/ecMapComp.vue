@@ -137,16 +137,35 @@
         //<tr><td><a href="/#/testcamera?q=${d.picture}"><strong>foto overlap (experimental)</strong></a></td></tr>
 
         var contentString = `
-            <div id="content">
+            <div id="content" style="max-width:200px; max-height:500px;">
                 <div id="siteNotice"></div>
+                    <table>
+
+                    <tr><td><img src="${d.picture}" width="200"></td></tr>
+                    <tr><td>${d.street}; ${d.year}</td></tr>
+                    <tr><td><a type="button" href="/#/spot/${d.imgid}/${d.imgid}/description"><strong>description</strong> (${d.useas})</a></td></tr>
+
+                    </table>
+                
+                <\div>                
+
+                <!--
+                    <table>
+
+                    <tr><td><img src="${d.picture}" width="100"></td></tr>
+                    <tr><td><strong>est.address</strong></td><td>${d.street}</td></tr>
+                    <tr><td><strong>year</strong></td><td>${d.year}</td></tr>
+                    <tr><td><a type="button" href="/#/spot/${d.imgid}/${d.imgid}/description"><strong>Description</strong></a></td></tr>
+
+                    </table>
+                
                 <table>
                     <tr><td><button onclick="openModal_map('${d.picture}')"><strong>foto</strong></button></td></tr>
-                    <tr><td><a href="/#/hunt/${d.imgid}/${d.itemid}/description"><strong>foto overlap (experimental)</strong></a></td></tr>
+                    <tr><td><a href="/#/spot/${d.imgid}/${d.imgid}/description"><strong>foto overlap (experimental)</strong></a></td></tr>
                     <tr><td><strong>year</strong></td><td>${d.year}</td></tr>
                     <tr><td><strong>est.address</strong></td><td>${d.street}</td></tr>
                     <tr><td><strong>bron</strong></td><td><a href="https://www.facebook.com/PrentenVanWeleerAmsterdamDePijp/">Postcards from de Pijp</a></td></tr>
-                </table>
-            <\div>
+                </table>-->
             `
         
         
@@ -194,12 +213,23 @@
             }
         },
       makeMarker(d, mymark=false) {
+        let url;
+        if (d.useas == "hist") {
+            //code
+            url = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        }else if (d.useas == "errant") {
+            //code
+            url = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+        }else{
+            url = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        }
         let zelf = this;
         let m = new window.google.maps.Marker({
           position: new window.google.maps.LatLng(d.lat, d.lng),
           //icon: require('../assets/googlecamerablue.png'),//
           //icon: !mymark?"http://icons.iconarchive.com/icons/designbolts/free-multimedia/32/Dslr-Camera-icon.png":{path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#00CCFF', fillOpacity: 0.8, strokeWeight: 1},
-          icon: !mymark?this.iconType(d.useas):{path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#00CCFF', fillOpacity: 0.8, strokeWeight: 1},
+          //icon: !mymark?this.iconType(d.useas):{path: google.maps.SymbolPath.CIRCLE, scale: 7, fillColor: '#00CCFF', fillOpacity: 0.8, strokeWeight: 1},
+          icon: {url:url},
           map: zelf.$map,
           //title: !mymark?d.street:'ME',
         })
