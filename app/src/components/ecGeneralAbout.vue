@@ -2,27 +2,46 @@
         <!-- COMPONENT about START -->
     <div id="about" style="margin:10px 20px; z-index:100;">
         <div>
-          <h4 style="margin: 30px 20px;"><u>About VerPijp</u></h4>
+          <h4 style="margin: 30px 20px;"><u>About OldDePijp</u></h4>
           
-          <h5><u><i>What?</i></u></h5>
-          <p>This proof-of-concept sketches a browsing alternative through collections of historical images of De Pijp, geocoded at the approximated locations where the images were taken. Current source is <i>Stadarchief Amsterdam</i> API. The resulting demo site is part of a broader personal project: <i>De Pijp Experiment</i> - proof-of-concept sites focused on solutions/alternatives for De Pijp neighborhood by De Pijp neighbors.</p>
+          <h5><u><i>What</i></u></h5>
+          <p>OldDePijp is an open-source map tool that provides detailed browsing of historic De Pijp images.
+This tool maps around 1,000 images from De Pijp dating back to 1850.</p>
+
+        <p>This tool clones and then extends the capabilities of an on-going project already implemented for other cities (<a href="http://www.oldsf.org/#">OldSF</a>, <a href="https://www.oldnyc.org/#">OldNYC</a>, <a href="https://oldto.sidewalklabs.com/#">OldTO</a>), all authored by <a href="https://twitter.com/danvdk">Dan Vanderkamp</a>. Another inspiring project was <a href="https://www.oldams.nl/">OldAms</a>, which also took inspiration from the Vanderkamp's projects.</p>
+
+        <!--<p>The goal is to help De Pijp visitors and residents discover something new about this neighbourhood, by providing a powerful way to visualize the changes that have taken place over time.</p>
+
+        For example, on the left is a current photo of Yonge Street at Temperance. We can see the historic Dineen building and its ground-floor coffee shop. We also see four lanes of car traffic, with some road work taking place and a notable lack of pedestrian activity.
+
+        On the right is a photo from the same corner circa 1903. We see the Dineen building in its original glory as a fur company. We see a streetcar heading our way but no private cars, which hadn’t yet been adopted en masse. We also see lots of sidewalk activity outside a diverse and inviting array of building facades and shop awnings.-->
           
-          <h5><u><i>Why?</i></u></h5>
-          <p>People trend to create stronger bonds to places for which they know its history and its subculture. The goal of this concept is to help neighbors and visitors to create that bond to De Pijp neighbourhood through old images. It takes inspiration from diferent directions:
-          <ul>
-              <li>My kid, who for some time showed an special interest in history</li>
-              <li>Some enthusiastic neighbors who have been sharing with me details of the history of De Pijp and Amsterdam</li>
-              <li>Previous initiatives: www.oldsf.org and its Amsterdam clone, www.oudams.nl; London Museum's StreetMuseum and its Dutch counterpart, Street Museum NL (onh.nl); "Verbeelding aan de Amstel" Exhibition; others</li>
-          </ul>
-          </p>
+          <h5><u><i>Why</i></u></h5>
+          <p>People trend to create stronger bonds to places for which they know its history and its subculture. The goal of this concept is to help neighbors and visitors to create that bond to De Pijp neighbourhood through old images.</p>
           
-          <h5><u><i>For Who?</i></u></h5>
-          <p>The project tests a light tool destinated to the general public, no matter the background, who want to inmerse into the historical context of the neighborhood. It could be also thought as a tool for students and those in the educative sector.</p>
           
-          <h5><u><i>Who?</i></u></h5>
-          <img id="myphoto" src="../assets/20140525_151620.png">
+          <h4 style="margin: 30px 20px;"><u>FAQ</u></h4>
+          <h5><u><i>Who</i></u></h5>
+          <!--<img id="myphoto" src="../assets/20140525_151620.png" witdh="200px">-->
           <p>Hi. My name is Evaristo and I have been learning to code during my free time. Enjoy problem-solving and trouble-shooting. I also have a passion for data and data-driven projects. I speak Python, Javascript, SQL, and a bit of other foreign languages. "Simplicity" and "Social" drive me in.</p>
-        </div>
+
+          <h5><u><i>For Who</i></u></h5>
+          <p>The project tests a light tool destinated to the general public, no matter the background, who want to inmerse into the historical context of the neighborhood. It could be also thought as a tool for students and those in the educative sector.</p>
+
+          <h5><u><i>Resources</i></u></h5>
+          <p>The project makes use of different online public resources, including but not exclusively: Postcards from De Pijp Facebook group; Amsterdam Archief; Flickr; Pinterest; etc.</p>
+          <p>The creator of OldDePijp did not collect or digitize any of these images — credit for that massive undertaking belongs entirely to the corresponding indiviuals and organizations.</p>
+          <p>Currently, clicking on a photo pulls up the information curated by the author of this tool. The information might come from the same source where the image was taken, another source, or from personal fieldwork.</p>
+          
+          <h5><u><i>Geocoding</i></u></h5>         
+          <p>The approach in this project is different to benchmark projects (the OldXX series) - instead of geocoding based on address, the author tried to find <i>the place from where the image was taken</i>. The geocoding has been done largely manually, based on previous knowledge of the area, use of internet mapping tools like Google Maps, and field visits.</p>
+          <p>The reason for that is the nature of this project, which is intended as OUTDOOR exploration of the area and a more immersive approach than the prescedent projects.</p>
+          <p>Despite of the efforts the geocoding is likely not perfect. Many changes in landscape, streets and premises will certainly make difficult to determine the correct location. If you see an incorrect address in the collection, please email us.</p>
+          
+          <h5><u><i>Copyrights</i></u></h5>
+          <p>This project gave priority to images whose copyright is in the public domain, which means permission is not required for reuse. In all cases though the copyright information is shown with the image entry or a label.</p>
+        
+        </div>          
     </div><!-- COMPONENT about END -->
 </template>
 <style>
