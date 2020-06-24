@@ -8,8 +8,14 @@
           <p>OldDePijp is an open-source map tool that provides detailed browsing of historic De Pijp images.
 This tool maps around 1,000 images from De Pijp dating back to 1850.</p>
 
-        <p>This tool clones and then extends the capabilities of an on-going project already implemented for other cities (<a href="http://www.oldsf.org/#">OldSF</a>, <a href="https://www.oldnyc.org/#">OldNYC</a>, <a href="https://oldto.sidewalklabs.com/#">OldTO</a>), all authored by <a href="https://twitter.com/danvdk">Dan Vanderkamp</a>. Another inspiring project was <a href="https://www.oldams.nl/">OldAms</a>, which also took inspiration from the Vanderkamp's projects.</p>
-
+        <p>This tool clones many features of an on-going project already implemented for other cities (<a href="http://www.oldsf.org/#">OldSF</a>, <a href="https://www.oldnyc.org/#">OldNYC</a>, <a href="https://oldto.sidewalklabs.com/#">OldTO</a>), all authored by <a href="https://twitter.com/danvdk">Dan Vanderkamp</a>. Another inspiring project was <a href="https://www.oldams.nl/">OldAms</a>, which also took inspiration from the Vanderkamp's projects.</p>
+        <p>However, it departs from those projects in trying </p>
+        <ul>
+                <li>Differently to the cited projects which are more a geolocated catalog of images, this one seeks to offer an educative outdoor experience, although it doesn't force it - you can use it from your desktop.</li>
+                <li>In order to make that outdoor experience smoother, the geolocation of the images are <i>the approximate position from where the image was taken</i> instead of the address they refer to - so the user can see the subject of the old image from the correct position.</li>
+                <li>This project also includes historical tails of De Pijp, trying to add a different informative level than its counterparts.</li>
+                <li>Finally, it also includes some games intended to the people who want to explore more by looking for "missing details".</li>
+        </ul>
         <!--<p>The goal is to help De Pijp visitors and residents discover something new about this neighbourhood, by providing a powerful way to visualize the changes that have taken place over time.</p>
 
         For example, on the left is a current photo of Yonge Street at Temperance. We can see the historic Dineen building and its ground-floor coffee shop. We also see four lanes of car traffic, with some road work taking place and a notable lack of pedestrian activity.
@@ -21,9 +27,6 @@ This tool maps around 1,000 images from De Pijp dating back to 1850.</p>
           
           
           <h4 style="margin: 30px 20px;"><u>FAQ</u></h4>
-          <h5><u><i>Who</i></u></h5>
-          <!--<img id="myphoto" src="../assets/20140525_151620.png" witdh="200px">-->
-          <p>Hi. My name is Evaristo and I have been learning to code during my free time. Enjoy problem-solving and trouble-shooting. I also have a passion for data and data-driven projects. I speak Python, Javascript, SQL, and a bit of other foreign languages. "Simplicity" and "Social" drive me in.</p>
 
           <h5><u><i>For Who</i></u></h5>
           <p>The project tests a light tool destinated to the general public, no matter the background, who want to inmerse into the historical context of the neighborhood. It could be also thought as a tool for students and those in the educative sector.</p>
@@ -40,6 +43,11 @@ This tool maps around 1,000 images from De Pijp dating back to 1850.</p>
           
           <h5><u><i>Copyrights</i></u></h5>
           <p>This project gave priority to images whose copyright is in the public domain, which means permission is not required for reuse. In all cases though the copyright information is shown with the image entry or a label.</p>
+
+          <h5><u><i>Who</i></u></h5>
+          <!--<img id="myphoto" src="../assets/20140525_151620.png" witdh="200px">-->
+          <p>Hi. My name is Evaristo and I have been learning to code during my free time. Enjoy problem-solving and trouble-shooting. I also have a passion for data and data-driven projects. I speak Python, Javascript, SQL, and a bit of other foreign languages. "Simplicity" and "Social" drive me in.</p>
+
         
         </div>          
     </div><!-- COMPONENT about END -->
