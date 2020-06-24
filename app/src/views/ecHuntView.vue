@@ -10,7 +10,7 @@
             </li>
           </ul>      
         </nav>
-        <h3>{{myitemdata.eststreet}}</h3>
+        <h3>{{itemeststreet}}</h3>
         <!--<pre>{{item}}</pre>
         {{$route.params}}-->
         <router-view :myitemdata="myitemdata"></router-view>
@@ -114,6 +114,14 @@
                     return verdata.output[i];
                 }
             };
+        },
+        itemeststreet(){
+            if (this.myitemdata) {
+                //code
+                return this.myitemdata.eststreet;
+            }else{
+                return
+            }
         }
       }
     }
