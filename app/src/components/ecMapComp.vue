@@ -20,9 +20,10 @@
               </div>
             </div>
         </div>
-        <!--<h1>VerPijp Project</h1>-->
-        <div class="btn btn-dark" style="position:absolute; z-index:100; left:10px; top:40px;">OudPijp</div>
-        <a href="./#/about" class="btn btn-primary" style="position:absolute; z-index:100; left:100px; top:40px;">About</a>
+        <!--<h1>VerPijp Project</h1>
+        <div class="btn btn-dark" style="position:absolute; z-index:100; left:10px; top:40px;">OudPijp</div>-->
+        <a href="./#/" class="btn btn-dark" style="position:absolute; z-index:100; left:10px; top:40px;">OldDePijp</a>
+        <a href="./#/about" class="btn btn-primary" style="position:absolute; z-index:100; left:110px; top:40px;">About</a>
         <div id="map" class="h-250"></div>
     </div>
 </template>
@@ -136,14 +137,16 @@
         //I substituted the following for future changes            
         //<tr><td><a href="/#/testcamera?q=${d.picture}"><strong>foto overlap (experimental)</strong></a></td></tr>
 
+        let itempic = d.useas != 'collectable'? d.picture:"";
+        let itemref = d.useas != 'collectable'? "/#/spot/"+d.imgid+"/"+d.imgid+"/description":"/#/";
         var contentString = `
             <div id="content" style="max-width:200px; max-height:500px;">
                 <div id="siteNotice"></div>
                     <table>
 
-                    <tr><td><img src="${d.picture}" width="200"></td></tr>
+                    <tr><td><img src="${itempic}" width="200"></td></tr>
                     <tr><td>${d.street}; ${d.year}</td></tr>
-                    <tr><td><a type="button" href="/#/spot/${d.imgid}/${d.imgid}/description"><strong>description</strong> (${d.useas})</a></td></tr>
+                    <tr><td><a type="button" href=${itemref}><strong>description</strong> (${d.useas})</a></td></tr>
 
                     </table>
                 
@@ -212,18 +215,27 @@
                 return "http://icons.iconarchive.com/icons/double-j-design/super-mono-3d/32/compass-icon.png"
             }
         },
+      //https://stackoverflow.com/questions/8248077/google-maps-v3-standard-icon-shadow-names-equiv-of-g-default-icon-in-v2
+      //https://www.blog.google/products/maps/google-maps-gets-new-look/
+      //https://stackoverflow.com/questions/17746740/google-map-icons-with-visualrefresh
+      //http://map-icons.com/
       makeMarker(d, mymark=false) {
         let url;
-        if (d.useas == "hist") {
-            //code
-            url = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-        }else if (d.useas == "errant") {
+        if (d.useas == "story") {
             //code
             url = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-        }else{
-            url = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        }else if (d.useas == "explore") {
+            //code
+            url = "https://maps.google.com/mapfiles/ms/icons/green-dot.png";
+            //url = "https://mt.google.com/vt/icon/hiker.png";
+        }else if (d.useas == "collectable"){
+            url = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        }else {
+            //code
+             url = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
         }
         let zelf = this;
+
         let m = new window.google.maps.Marker({
           position: new window.google.maps.LatLng(d.lat, d.lng),
           //icon: require('../assets/googlecamerablue.png'),//

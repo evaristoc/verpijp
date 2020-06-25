@@ -27,7 +27,7 @@ This tool maps around 1,000 images from De Pijp dating back to 1850.</p>
           <p>People trend to create stronger bonds to places for which they know its history and its subculture. The goal of this concept is to help neighbors and visitors to create that bond to De Pijp neighbourhood through old images.</p>
           
           
-          <h4 style="margin: 30px 20px;"><u>FAQ</u></h4>
+          <h4 style="margin: 30px 20px;"><u>FAQ's</u></h4>
 
           <h5><u><i>For Who</i></u></h5>
           <p>The project tests a light tool destinated to the general public, no matter the background, who want to inmerse into the historical context of the neighborhood. It could be also thought as a tool for students and those in the educative sector.</p>

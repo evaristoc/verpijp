@@ -5,7 +5,7 @@
             <div class="row mt-1">
                 <div class="col-12">
                     <!--<img src="https://i.ibb.co/zbF6Kt9/8232820489-579018c1cd-b.jpg" class="float-left" width="100%">-->
-					<img :src="myitemdata.gamedata.fotogame" class="float-left" width="100%">
+					<img :src="itemgamefoto" class="float-left" width="100%">
 				</div>
             </div>
             <!--<div class="row mt-1">
@@ -16,8 +16,8 @@
             <div class="row mt-1">
                 <div class="col-12" role="group">
                     <form>
-                         <label for="input-live"><h4>{{myitemdata.gamedata.question}}</h4></label>
-                         <input v-model="$v.text.$model" :class="status($v.text)" :placeholder="myitemdata.gamedata.placeholder">
+                         <label for="input-live"><h4>{{itemgamequestion}}</h4></label>
+                         <input v-model="$v.text.$model" :class="status($v.text)" :placeholder="itemgameplaceholder">
                          <button class="btn btn-success" @click.prevent="gotoSol()">Solution</button><!--https://stackoverflow.com/questions/45185891/vue-js-navigate-to-url-with-question-mark-->
                     </form>
                      <!--<pre>{{ $v }}</pre>-->
@@ -40,6 +40,7 @@
   
    
   export default {
+   props:['myitemdata'],
     data(){
         return {
             text: '',
@@ -49,8 +50,31 @@
         //text(){
         //    return this.text
         //}
+		itemgamefoto(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.fotogame) {
+				//code
+				return this.myitemdata.gamedata.fotogame;
+			}else{
+				return 'https://weownrotterdam.nl/app/uploads/2019/06/BLACK.jpg';
+			}
+		},	
+		itemgamequestion(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.question) {
+				//code
+				return this.myitemdata.gamedata.question;
+			}else{
+				return '(no question)';
+			}
+		},
+		itemgameplaceholder(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.placeholder) {
+				//code
+				return this.myitemdata.gamedata.placeholder;
+			}else{
+				return '';
+			}
+		},
     },
-  props:['myitemdata'],
   validations: {
   	text: {
     	required,
