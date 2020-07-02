@@ -6,7 +6,7 @@
           <!-- Links -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/#/">&times;</a>
+              <a class="nav-link" @click="$router.go(-1)">&times;</a>
             </li>
           </ul>      
         </nav>

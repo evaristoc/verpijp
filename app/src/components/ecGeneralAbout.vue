@@ -63,7 +63,7 @@ This tool maps around 1,000 images from De Pijp dating back to 1850.</p>
  
           <h5><u><i>Who</i></u></h5>
           <!--<img id="myphoto" src="../assets/20140525_151620.png" witdh="200px">-->
-          <p>Hi. My name is Evaristo and I have been learning to code during my free time. Enjoy problem-solving and trouble-shooting. I also have a passion for data and data-driven projects. I speak Python, Javascript, SQL, and a bit of other foreign languages. "Simplicity" and "Social" drive me in.</p>
+          <p>Hi. My name is Evaristo. Enjoy problem-solving and trouble-shooting. I have passion for data and data-driven projects. I speak Python, Javascript, SQL, and other foreign languages. "Simplicity" and "Social" drive me in.</p>
 
         
         </div>          

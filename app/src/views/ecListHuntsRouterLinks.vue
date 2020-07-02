@@ -1,6 +1,14 @@
 <template>
     <div>
-        <h3>HELLO COLLECTABLES</h3>
+        <nav class="navbar navbar-expand-sm bg-dark">
+          <h3 style="color:#fff;">Collectables View</h3>
+          <!-- Links -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" @click="$router.go(-1)">&times;</a>
+            </li>
+          </ul>      
+        </nav>
         <div class="container" v-if="collects.length > 0" v-for="collect in collects">
             <div class="row mt-1">
                 <div class="col-12">
