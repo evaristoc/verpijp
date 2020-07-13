@@ -1,7 +1,30 @@
 <template>
         <transition appear>
-        
-     	<div class="container" style="color: #001011;">
+            
+       
+        <div class="container" style="color: #001011;">
+            <div class="modal fade" id="myModal_map" style="background-color: rgba(0, 0, 0, 0.6);">
+                  <!-- REFERENCES -->
+                  <!--https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_modal&stacked=h-->
+                  <!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_img-->
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                  <div class="modal-content mb-0 p-0" style="background-color: rgba(255, 255, 255, 0.6);">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <div class="container-fluid">
+                        <button type="button" class="btn btn-warning close-modal" @click="closeModal()">&times;</button>
+                        <!--<img class="img-fluid" id="img01_map" style="height:100%; width:100%;">-->
+                        <p>{{itemgameintro}}</p>
+                      </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                      <h5 id="modal-title_map" style="color:blue"><a :href="'./#/collects?nodeimg='+itemimgid">Go</a></h5>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            
             <div class="row mt-1">
                 <div class="col-12" style="position:relative;">
                     <!--<img src="https://i.ibb.co/zbF6Kt9/8232820489-579018c1cd-b.jpg" class="float-left" width="100%">-->
@@ -35,13 +58,17 @@
             <div class="row mt-1">
                 <div class="col-12" role="group">
                    <h3>{{itemstreet}}</h3>
-                        <p>YEAR: <b>{{itemyear}}</b></p>
-                        <p>AUTHOR: </p>
-                        <p>SOURCE: <b>{{itemsource}}</b></p>  
-                        <p>COPYRIGHT: <b>Public/Unkonwn</b></p>
+                       <div class="fmetadata">
+                            <p>YEAR: <b>{{itemyear}}</b></p>
+                            <p>AUTHOR: <b>{{itemauthor}}</b></p>
+                            <p>SOURCE: <b>{{itemsource}}</b></p>  
+                            <p>COPYRIGHT: <b>{{itemcopyrights}}</b></p>
+                        </div>
                         </br>
                       <ul>
-                        <li v-if="itemuseas == 'explore'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/green-camera-icon.png"></span> <a :href="'./#/collects?nodeimg='+itemimgid">Play a Treasure Hunt Game!</a></li>
+                        <li v-if="itemuseas == 'explore'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/green-camera-icon.png"></span> <a @click="openModal()">Play a Treasure Hunt Game!</a></li>
+                        <!--<li v-if="itemuseas == 'explore'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/green-camera-icon.png"></span> <a :href="'./#/collects?nodeimg='+itemimgid">Play a Treasure Hunt Game!</a></li>-->
+
                       </ul>
                         <div v-if="itemuseas == 'story' || itemuseas == 'collectable'">
                             <h3 v-if="itemuseas == 'story'"><span><img src="http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/24/blue-camera-icon.png"></span> Did you know that..?</h3>
@@ -93,10 +120,34 @@
                     return '';
                 }
             },
+            itemauthor(){
+                if (this.myitemdata) {
+                    //code
+                    return this.myitemdata.author;
+                }else{
+                    return '';
+                }
+            },
             itemsource(){
                 if (this.myitemdata) {
                     //code
                     return this.myitemdata.source;
+                }else{
+                    return '';
+                }
+            },
+            itemcopyrights(){
+                if (this.myitemdata) {
+                    //code
+                    return this.myitemdata.copyrights;
+                }else{
+                    return '';
+                }
+            },
+            itemgameintro(){
+                if (this.myitemdata && this.myitemdata.useas == 'explore') {
+                    //code
+                    return this.myitemdata.gameintro;
                 }else{
                     return '';
                 }
@@ -135,6 +186,25 @@
             },
         },
 		methods:{
+        
+            openModal(){
+                  let modal = document.getElementById('myModal_map');
+                  //let img = document.getElementById(this.idConcat(loc.itemid+'_img'));
+                  //let captionText = document.getElementById("modal-title_map");
+                  //console.log(img.src);
+                  let modalImg = document.getElementById("img01_map");
+                  modal.style.display = "block";
+                  //modalImg.src = picture;
+                  //captionText.innerHTML = loc.street+", "+loc.year;
+                  modal.classList.add('show');
+            },
+          closeModal(){
+            //let span = document.getElementsByClassName("close-modal")[0];
+            let modal = document.getElementById('myModal_map');
+            modal.classList.remove('show');
+            modal.style.display = "none";
+          },
+        
         },
     }
 
@@ -190,6 +260,7 @@ p {
 .v-enter, .v-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
 
 
 </style>

@@ -126,3 +126,8 @@
       }
     }
 </script>
+<style>
+    .fmetadata p{
+    font-size:smaller;
+}
+</style>

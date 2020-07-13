@@ -15,6 +15,18 @@
             </div>-->
             <div class="row mt-1">
                 <div class="col-12" role="group">
+                   <h3>{{itemstreet}}</h3>
+				   <div class="fmetadata">
+						<p>YEAR: <b>{{itemyear}}</b></p>
+						<p>AUTHOR: <b>{{itemauthor}}</b></p>
+						<p>SOURCE: <b>{{itemsource}}</b></p>  
+						<p>COPYRIGHT: <b>{{itemcopyrights}}</b></p>					
+				   </div>
+					</br>
+				</div>
+			</div>
+            <div class="row mt-1">
+                <div class="col-12" role="group">
                     <form>
                          <label for="input-live"><h4>{{itemgamequestion}}</h4></label>
                          <input v-model="$v.text.$model" :class="status($v.text)" :placeholder="itemgameplaceholder">
@@ -23,6 +35,7 @@
                      <!--<pre>{{ $v }}</pre>-->
                 </div>
             </div>
+                      
         </div>
     </transition>
 </template>
@@ -56,6 +69,38 @@
 				return this.myitemdata.gamedata.fotogame;
 			}else{
 				return 'https://weownrotterdam.nl/app/uploads/2019/06/BLACK.jpg';
+			}
+		},
+		itemyear(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.year) {
+				//code
+				return this.myitemdata.gamedata.year;
+			}else{
+				return '[UNKNOWN]';
+			}
+		},
+		itemauthor(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.author) {
+				//code
+				return this.myitemdata.gamedata.author;
+			}else{
+				//return '[UNKNOWN]';
+			}
+		},
+		itemsource(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.src) {
+				//code
+				return this.myitemdata.gamedata.src;
+			}else{
+				//return '[UNKNOWN]';
+			}
+		},
+		itemcopyrights(){
+			if (this.myitemdata && this.myitemdata.gamedata && this.myitemdata.gamedata.copyrights) {
+				//code
+				return this.myitemdata.gamedata.copyrights;
+			}else{
+				//return '[UNKNOWN]';
 			}
 		},	
 		itemgamequestion(){
